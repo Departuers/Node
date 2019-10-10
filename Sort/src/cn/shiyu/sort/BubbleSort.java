@@ -1,6 +1,6 @@
 package cn.shiyu.sort;
 
-import com.company.Common;
+import cn.shiyu.utils.Common;
 
 import java.util.Arrays;
 
@@ -50,8 +50,8 @@ public class BubbleSort {
     }
 
     public static void main(String[] args) {
-        int[] ad = Common.random(200, 1000);
-        Arrays.sort(ad);
-        Common.out(ad);
+        int[] ad = Common.random(10, 200000);
+        sortToBig(ad);
+        System.out.println(Arrays.toString(ad));
     }
 }

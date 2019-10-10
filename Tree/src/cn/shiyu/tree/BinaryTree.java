@@ -1,4 +1,4 @@
-package com.company;
+package cn.shiyu.tree;
 
 import java.util.Arrays;
 import java.util.LinkedList;

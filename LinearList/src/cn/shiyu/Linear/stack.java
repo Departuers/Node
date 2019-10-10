@@ -1,4 +1,4 @@
-package com.company;
+package cn.shiyu.Linear;
 
 public interface stack<T> {
     int getsize();

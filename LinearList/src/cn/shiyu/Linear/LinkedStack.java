@@ -1,4 +1,4 @@
-package com.company;
+package cn.shiyu.Linear;
 
 public class LinkedStack<T> implements stack<T> {
     private Lined<T> lined;

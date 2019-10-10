@@ -1,5 +1,8 @@
-package com.company;
+package cn.shiyu.sort;
 
+import cn.shiyu.utils.Common;
+
+import java.util.Arrays;
 
 /**
  * 快速排序双边循环法
@@ -44,8 +47,8 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        int[] a = Common.random(10, 200000);
+        int[] a = Common.random(10, 200);
         Quick(a, 0, a.length - 1);
-        Common.out(a);
+        System.out.println(Arrays.toString(a));
     }
 }
