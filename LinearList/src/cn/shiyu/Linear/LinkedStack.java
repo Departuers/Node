@@ -9,25 +9,24 @@ public class LinkedStack<T> implements stack<T> {
 
     @Override
     public int getsize() {
-
         return lined.getsize();
     }
 
     @Override
     public void push(T element) {
-     
+
         lined.addLast(element);
     }
 
     @Override
     public T pop() {
-     
+
         return lined.remove(getsize() - 1);
     }
 
     @Override
     public T peek() {
-        
+
         return lined.getLast();
     }
 

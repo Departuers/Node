@@ -50,8 +50,8 @@ public class BubbleSort {
     }
 
     public static void main(String[] args) {
-        int[] ad = Common.random(10, 200000);
-        sortToBig(ad);
+        int[] ad = Common.random(10, 2000);
+        sortToBig(ad.clone());
         System.out.println(Arrays.toString(ad));
     }
 }
