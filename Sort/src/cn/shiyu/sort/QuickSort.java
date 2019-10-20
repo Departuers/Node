@@ -18,6 +18,7 @@ public class QuickSort {
     }
 
     private static int partition(int[] data, int startIndex, int endIndex) {
+
         int pivot = data[startIndex];
         int left = startIndex;
         int right = endIndex;
@@ -36,18 +37,21 @@ public class QuickSort {
         }
         data[startIndex] = data[left];
         data[left] = pivot;
+
         return left;
     }
 
     /**
      * 单边循环快速排序
      */
-    public static void Quickl() {
-
-    }
-
+//    public static void QuickByOne(int[] data,int startIndex,int endIndex) {
+//        if (startIndex>=endIndex){
+//            int pivotIndex=partition(data,startIndex,endIndex);
+//            QuickByOne(data,);
+//        }
+//    }
     public static void main(String[] args) {
-        int[] a = Common.random(10, 200);
+        int[] a = Common.random(1000, 200);
         Quick(a, 0, a.length - 1);
         System.out.println(Arrays.toString(a));
     }
