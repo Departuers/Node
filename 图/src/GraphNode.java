@@ -32,12 +32,5 @@ public class GraphNode {
     public static void main(String[] args) {
         GraphNode n1 = new GraphNode(1);
         GraphNode n2 = new GraphNode(2);
-        GraphNode n3 = new GraphNode(3);
-        GraphNode n4 = new GraphNode(4);
-        GraphNode n5 = new GraphNode(5);
-        GraphNode n6 = new GraphNode(6);
-        GraphNode n7 = new GraphNode(7);
-        GraphNode n8 = new GraphNode(8);
     }
-
 }

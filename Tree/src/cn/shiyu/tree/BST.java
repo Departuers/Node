@@ -32,7 +32,6 @@ public class BST<E extends Comparable<E>> {
             left = null;
             right = null;
         }
-
     }
 
     private Node root;
@@ -61,7 +60,6 @@ public class BST<E extends Comparable<E>> {
      * 第一次访问该元素的时候打印该元素就是前序遍历，
      * 第二次访问该元素的时候打印该元素就是中序遍历，输出有序的
      * 第三次访问该元素的时候打印该元素就是后序遍历，用来手动释放内存,
-     * Java直接root赋值为null，断开连接会自动回收
      */
     public void preOrder() {
         preOrder(root);

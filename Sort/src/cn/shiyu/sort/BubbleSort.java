@@ -2,7 +2,6 @@ package cn.shiyu.sort;
 
 import cn.shiyu.utils.Common;
 
-import javax.sound.midi.Soundbank;
 import java.util.Arrays;
 
 // 冒泡排序
@@ -37,7 +36,7 @@ public class BubbleSort {
     }
 
     public static int[] sortToS(int data[]) {
-        int count=0;
+        int count = 0;
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data.length - i - 1; j++) {
                 int temp = 0;
@@ -49,7 +48,7 @@ public class BubbleSort {
                 }
             }
         }
-        System.out.println("对比次数"+count);
+        System.out.println("对比次数" + count);
         return data;
     }
 
