@@ -3,7 +3,7 @@ package cn.shiyu.tree;
 import java.util.Arrays;
 
 /**
- * 二叉堆，，，
+ * 二叉堆 by小灰灰
  */
 public class DoubleTree {
     /**

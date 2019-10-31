@@ -1,0 +1,126 @@
+package cn.shiyu.tree;
+
+import java.util.ArrayList;
+
+//二叉堆
+public class MaxHeap<E extends Comparable<E>> {
+    private ArrayList<E> data;
+
+    public MaxHeap(int data) {
+        this.data = new ArrayList<>(data);
+    }
+
+    public MaxHeap() {
+        this.data = new ArrayList<>();
+    }
+
+    public boolean isEmpty() {
+        return data.isEmpty();
+    }
+
+    public int size() {
+        return data.size();
+    }
+
+    public int parent(int index) {
+        if (index == 0) {
+            System.out.println("该节点没有父节点");
+            return -1;
+        }
+        return (index - 1) / 2;
+    }
+
+    public int leftchild(int index) {
+        return index * 2 + 1;
+    }
+
+    public int rightchild(int index) {
+        return index * 2 + 2;
+    }
+
+    //增加元素
+    public void add(E e) {
+        data.add(e);
+        siftUp(data.size() - 1);
+    }
+
+    private void siftUp(int k) {
+        //根节点不能上浮,,,,,,索引为k的值和k的父节点的值,比父节点值大就交换元素
+        while (k > 0 && data.get(k).compareTo(data.get(parent(k))) > 0) {
+            E e = data.get(k);
+            data.set(k, data.get(parent(k)));
+            data.set(parent(k), e);
+            k = parent(k);
+        }
+    }
+
+    public E getMax() {
+        if (data.isEmpty())
+            throw new IllegalArgumentException("no data");
+        return data.get(0);
+    }
+
+    public E extractMax() {
+        E e = getMax();
+        data.set(0, data.get(size() - 1));
+        data.remove(size() - 1);
+        siftDown(0);
+        return e;
+    }
+
+    private void siftDown(int k) {
+        while (leftchild(k) < size()) {
+            int j = leftchild(k);
+            if (j + 1 < size() && data.get(j + 1).compareTo(data.get(j)) > 0) {
+                j = rightchild(k);
+            }//data[j]是left和right节点中的最大值；
+            if (data.get(k).compareTo(data.get(j)) >= 0)
+                break;
+            E e = data.get(j);
+
+            data.set(j, data.get(k));
+            data.set(k, e);
+            k = j;
+        }
+    }
+    //取出堆顶元素替换成e并下沉
+    public E replace(E e) {
+        E ret = getMax();
+        data.set(0, e);
+        siftDown(0);
+        return ret;
+    }
+
+    @Override
+    public String toString() {
+        return "MaxHeap{" +
+                "data=" + data +
+                '}';
+    }
+
+    public static void main(String[] args) {
+        MaxHeap<Integer> maxHeap = new MaxHeap<>(12);
+        maxHeap.add(123);
+        System.out.println(maxHeap);
+        maxHeap.add(542);
+        System.out.println(maxHeap);
+        maxHeap.add(253);
+        System.out.println(maxHeap);
+        maxHeap.add(743);
+        System.out.println(maxHeap);
+        maxHeap.add(131);
+        System.out.println(maxHeap);
+        maxHeap.extractMax();
+        System.out.println(maxHeap);
+        maxHeap.extractMax();
+        System.out.println(maxHeap);
+        maxHeap.extractMax();
+        System.out.println(maxHeap);
+        maxHeap.extractMax();
+        System.out.println(maxHeap);
+        maxHeap.extractMax();
+        System.out.println(maxHeap);
+        maxHeap.extractMax();
+        System.out.println(maxHeap);
+    }
+}
