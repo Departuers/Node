@@ -126,11 +126,6 @@ public class MaxHeap<E extends Comparable<E>> {
         System.out.println(maxHeap);
         maxHeap.extractMax();
         System.out.println(maxHeap);
-        maxHeap.extractMax();
-        System.out.println(maxHeap);
-        maxHeap.extractMax();
-        maxHeap.extractMax();
-        System.out.println(maxHeap);
         MaxHeap<Integer> a = new MaxHeap<>(new Integer[]{21, 314, 13, 114, 2, 312, 312, 12231, 312, 312, 13, 15, 22, 3416, 4, 53, 45});
         System.out.println(a);
         a.add(168657);
