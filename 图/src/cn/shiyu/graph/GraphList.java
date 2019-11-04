@@ -6,21 +6,21 @@ import java.util.List;
 /**
  * 邻接表
  */
-public class GraphNode {
+public class GraphList {
 
     public int val;
-    private List<GraphNode> neighbors;// 邻居
+    private List<GraphList> neighbors;// 邻居
     public boolean checked = false;
 
-    public GraphNode(int val) {
+    public GraphList(int val) {
         this.val = val;
     }
 
-    public GraphNode getneighbors(int i) {
+    public GraphList getneighbors(int i) {
         return neighbors.get(i);
     }
 
-    public void add(GraphNode node) {
+    public void add(GraphList node) {
         if (this.neighbors == null) {
             this.neighbors = new ArrayList<>();
         }
@@ -32,7 +32,7 @@ public class GraphNode {
     }
 
     public static void main(String[] args) {
-        GraphNode n1 = new GraphNode(1);
-        GraphNode n2 = new GraphNode(2);
+        GraphList n1 = new GraphList(1);
+        GraphList n2 = new GraphList(2);
     }
 }

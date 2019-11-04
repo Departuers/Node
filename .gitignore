@@ -47,3 +47,6 @@ rebel.xml
 ## Other ##
 logs/
 temp/
+bin/
+.vscode
+out/
