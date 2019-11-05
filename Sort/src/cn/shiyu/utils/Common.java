@@ -1,7 +1,6 @@
 package cn.shiyu.utils;
 
 import java.util.Random;
-import java.util.TooManyListenersException;
 
 public class Common {
 

@@ -72,7 +72,6 @@ public class BST<E extends Comparable<E>> {
         System.out.print(node.e + "->");
         preOrder(node.left);
         preOrder(node.right);
-
     }
 
     public E minNum() {
@@ -169,6 +168,27 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
+    public void remove(E e) {
+        root = reomve(root, e);
+    }
+
+    private Node reomve(Node node, E e) {
+        if (node == null) {
+            return null;
+        }
+        if (e.compareTo(node.e)>0){
+            node.right=reomve(node.right,e);
+            return node;
+        }else if (e.compareTo(node.e)<0){
+            node.left=reomve(node.left,e);
+            return node;
+        }
+        else {
+
+        }
+
+    }
+
     public BST() {
         this.root = null;
         this.size = 0;
@@ -177,4 +197,5 @@ public class BST<E extends Comparable<E>> {
     public int getSize() {
         return size;
     }
+
 }

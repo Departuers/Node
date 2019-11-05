@@ -54,7 +54,7 @@ public class BubbleSort {
 
     public static void main(String[] args) {
         int[] ad = Common.random(10, 2000);
-        sortToS(ad.clone());
+        sortToS(ad);
         System.out.println(Arrays.toString(ad));
 //        int c=0;
 //        for (int i = 0; i < 10; i++) {

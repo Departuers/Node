@@ -2,7 +2,7 @@ package cn.shiyu.tree;
 
 import java.util.ArrayList;
 
-//二叉堆
+//二叉堆最大堆
 public class MaxHeap<E extends Comparable<E>> {
     private ArrayList<E> data;
 
@@ -88,7 +88,6 @@ public class MaxHeap<E extends Comparable<E>> {
             if (data.get(k).compareTo(data.get(j)) >= 0)
                 break;
             E e = data.get(j);
-
             data.set(j, data.get(k));
             data.set(k, e);
             k = j;

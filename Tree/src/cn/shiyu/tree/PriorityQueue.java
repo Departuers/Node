@@ -26,5 +26,4 @@ public class PriorityQueue<E extends Comparable<E>> {
     public E deQueue() {
         return maxHeap.extractMax();
     }
-
 }
