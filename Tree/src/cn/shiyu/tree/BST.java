@@ -19,7 +19,8 @@ public class BST<E extends Comparable<E>> {
         bst.add(16);
         bst.add(6);
         bst.preOrderByStack();
-        System.out.println(bst.minNum());
+        bst.remove(13);
+        System.out.println();
         bst.preOrderByStack();
     }
 
@@ -176,15 +177,31 @@ public class BST<E extends Comparable<E>> {
         if (node == null) {
             return null;
         }
-        if (e.compareTo(node.e)>0){
-            node.right=reomve(node.right,e);
+        if (e.compareTo(node.e) > 0) {
+            node.right = reomve(node.right, e);
             return node;
-        }else if (e.compareTo(node.e)<0){
-            node.left=reomve(node.left,e);
+        } else if (e.compareTo(node.e) < 0) {
+            node.left = reomve(node.left, e);
             return node;
-        }
-        else {
+        } else {
+            if (node.left == null) {
+                Node rightnode = node.right;
+                node.right = null;
+                size--;
+                return rightnode;
+            }
+            if (node.right == null) {
+                Node leftnode = node.left;
+                node.left = null;
+                size--;
+                return leftnode;
+            }
+            Node successor = minNum(node.right);
+            successor.right = removeMin(node.right);
+            successor.left = node.left;
 
+            node.left = node.right = null;
+            return successor;
         }
 
     }
