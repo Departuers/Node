@@ -18,10 +18,10 @@ public class BST<E extends Comparable<E>> {
         bst.add(14);
         bst.add(16);
         bst.add(6);
-        bst.preOrderByStack();
-        bst.remove(13);
+        bst.preOrder();
+        bst.removeMin();
         System.out.println();
-        bst.preOrderByStack();
+        bst.preOrder();
     }
 
     private class Node {
@@ -70,13 +70,14 @@ public class BST<E extends Comparable<E>> {
 
         if (node == null)
             return;
-        System.out.print(node.e + "->");
+
         preOrder(node.left);
+        System.out.print(node.e + "->");
         preOrder(node.right);
     }
 
     public E minNum() {
-        return minNum(root).e;
+        return minNumNR(root).e;
     }
 
     //非递归写法
@@ -203,7 +204,6 @@ public class BST<E extends Comparable<E>> {
             node.left = node.right = null;
             return successor;
         }
-
     }
 
     public BST() {

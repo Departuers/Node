@@ -1,4 +1,5 @@
 package cn.shiyu.tree;
+
 //二分搜索树实现map
 public class BSTMap<K extends Comparable<K>, V> {
     private class Node {
@@ -64,6 +65,58 @@ public class BSTMap<K extends Comparable<K>, V> {
         }
         System.out.println("不存在");
     }
-    //todo 删除哎。。。。。。。。。。。。。。。。。
 
+    public void remove(K k) {
+         root = reomve(root, k);
+    }
+
+    private Node reomve(Node node, K k) {
+        if (node == null) {
+            return null;
+        }
+        if (k.compareTo(node.key) > 0) {
+            node.right = reomve(node.right, k);
+            return node;
+        } else if (k.compareTo(node.key) < 0) {
+            node.left = reomve(node.left, k);
+            return node;
+        } else {
+            if (node.left == null) {
+                Node rightnode = node.right;
+                node.right = null;
+                size--;
+                return rightnode;
+            }
+            if (node.right == null) {
+                Node leftnode = node.left;
+                node.left = null;
+                size--;
+                return leftnode;
+            }
+            Node successor = minNum(node.right);
+            successor.right = removeMin(node.right);
+            successor.left = node.left;
+
+            node.left = node.right = null;
+            return successor;
+        }
+
+    }
+
+    public Node minNum(Node cur) {
+        while (cur.left != null) {
+            cur = cur.left;
+        }
+        return cur;
+    }
+
+    public Node removeMin(Node cur) {
+        if (cur == null)
+            return null;
+        while (cur.left != null) {
+            cur = cur.left;
+        }
+        Node a=cur;
+        return cur;
+    }
 }

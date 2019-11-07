@@ -51,7 +51,7 @@ public class QuickSort {
 //        }
 //    }
     public static void main(String[] args) {
-        int[] a = Common.random(1000, 200);
+        int[] a = Common.random(50, 200);
         Quick(a, 0, a.length - 1);
         System.out.println(Arrays.toString(a));
     }
