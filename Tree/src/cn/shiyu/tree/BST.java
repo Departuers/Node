@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
+//二分搜索树
 public class BST<E extends Comparable<E>> {
     public static void main(String[] args) {
         BST<Integer> bst = new BST<>();
@@ -18,10 +19,9 @@ public class BST<E extends Comparable<E>> {
         bst.add(14);
         bst.add(16);
         bst.add(6);
-        bst.preOrder();
-        bst.removeMin();
-        System.out.println();
-        bst.preOrder();
+        bst.preOrderByStack();
+        System.out.println(bst.minNum());
+        bst.preOrderByStack();
     }
 
     private class Node {
@@ -70,14 +70,13 @@ public class BST<E extends Comparable<E>> {
 
         if (node == null)
             return;
-
-        preOrder(node.left);
         System.out.print(node.e + "->");
+        preOrder(node.left);
         preOrder(node.right);
     }
 
     public E minNum() {
-        return minNumNR(root).e;
+        return minNum(root).e;
     }
 
     //非递归写法
@@ -184,26 +183,8 @@ public class BST<E extends Comparable<E>> {
         } else if (e.compareTo(node.e) < 0) {
             node.left = reomve(node.left, e);
             return node;
-        } else {
-            if (node.left == null) {
-                Node rightnode = node.right;
-                node.right = null;
-                size--;
-                return rightnode;
-            }
-            if (node.right == null) {
-                Node leftnode = node.left;
-                node.left = null;
-                size--;
-                return leftnode;
-            }
-            Node successor = minNum(node.right);
-            successor.right = removeMin(node.right);
-            successor.left = node.left;
-
-            node.left = node.right = null;
-            return successor;
         }
+        return null;
     }
 
     public BST() {
@@ -214,5 +195,4 @@ public class BST<E extends Comparable<E>> {
     public int getSize() {
         return size;
     }
-
 }

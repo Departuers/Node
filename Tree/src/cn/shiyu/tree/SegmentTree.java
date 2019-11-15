@@ -1,5 +1,7 @@
 package cn.shiyu.tree;
 
+//线段树
+@SuppressWarnings("all")
 public class SegmentTree<E> {
     private E[] data;
     private E[] tree;
@@ -8,8 +10,13 @@ public class SegmentTree<E> {
         data = (E[]) new Object[arr.length];
         for (int i = 0; i < arr.length; i++) {
             data[i] = arr[i];
-            tree = (E[]) new Object[4 * arr.length];
         }
+        tree = (E[]) new Object[4 * arr.length];
+        buildSegmentTree(0,0,data.length-1);
+    }
+    //在treeIndex创建表示区间[l...r]的线段树
+    private void buildSegmentTree(int treeIndex,int l,int r) {
+
     }
 
     public int getSize() {
@@ -17,32 +24,17 @@ public class SegmentTree<E> {
     }
 
     public E get(int index) {
-        if (index < 0 || index >= data.length)
-            throw new IllegalArgumentException("Index out");
+        if (index > data.length || index < 0)
+            throw new IndexOutOfBoundsException("数组下标越界");
         return data[index];
     }
 
     public int leftChild(int index) {
-        return 2 * index + 1;
+        return index * 2 + 1;
     }
 
     public int rightChild(int index) {
-        return 2 * index + 2;
+        return index * 2 + 2;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append('[');
-        for (int i = 0; i < tree.length; i++) {
-            if (tree[i] != null)
-                sb.append(tree[i]);
-            else
-                sb.append("null");
-            if (i != tree.length - 1)
-                sb.append('b');
-        }
-        sb.append(']');
-        return sb.toString();
-    }
 }
