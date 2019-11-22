@@ -1,7 +1,7 @@
 package cn.shiyu.tree;
 
 import java.util.TreeMap;
-
+//Trie
 public class MapSum {
     private class Node {
         int value;
@@ -14,7 +14,6 @@ public class MapSum {
         public Node() {
             this(0);
         }
-
     }
 
     private Node root;

@@ -1,12 +1,15 @@
 package cn.shiyu.tree;
 
-public class UnionFind2 implements UF {
+public class UnionFind3 implements UF {
     private int[] parent;
+    private int[] sz;
 
-    public UnionFind2(int size) {
+    public UnionFind3(int size) {
         parent = new int[size];
+        sz = new int[size];
         for (int i = 0; i < size; i++) {
             parent[i] = i;
+            sz[i] = 1;
         }//初始并查集每个元素并无连接关系
     }
 
@@ -17,7 +20,14 @@ public class UnionFind2 implements UF {
         int qRoot = find(q);
         if (pRoot == qRoot)
             return;
-        parent[pRoot] = qRoot;
+        //将元素少的树根节点，挂到元素多的节点树根上去
+        if (sz[pRoot] < sz[qRoot]) {
+            parent[pRoot] = qRoot;
+            sz[qRoot] += sz[pRoot];
+        } else {
+            parent[qRoot] = pRoot;
+            sz[qRoot] += sz[pRoot];
+        }
     }
 
     //O(h)h为树的高度
