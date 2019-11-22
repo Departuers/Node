@@ -19,9 +19,7 @@ public class BST<E extends Comparable<E>> {
         bst.add(14);
         bst.add(16);
         bst.add(6);
-        bst.preOrderByStack();
         System.out.println(bst.minNum());
-        bst.preOrderByStack();
     }
 
     private class Node {
@@ -131,6 +129,7 @@ public class BST<E extends Comparable<E>> {
                 stack.push(node.left);
         }
     }
+
 
     public boolean contains(E e) {
         return contains(root, e);

@@ -1,16 +1,22 @@
 package cn.shiyu.tree;
 
+import java.util.ArrayList;
+
 //二分搜索树实现map
-public class BSTMap<K extends Comparable<K>, V> {
+public class AVLTree<K extends Comparable<K>, V> {
     private class Node {
         Node left;
         Node right;
         K key;
         V value;
+        int height;//树的高度
 
         public Node(K key, V value) {
             this.key = key;
             this.value = value;
+            left = null;
+            right = null;
+            height = 1;
         }
     }
 
@@ -20,8 +26,15 @@ public class BSTMap<K extends Comparable<K>, V> {
     public void add(K k, V v) {
         root = add(root, k, v);
     }
-//重点！！！！！！！！！！
 
+    private int getHeight(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return node.height;
+    }
+
+    //重点！！！！！！！！！！
     private Node add(Node node, K key, V value) {
         if (node == null) {
             size++;
@@ -34,8 +47,63 @@ public class BSTMap<K extends Comparable<K>, V> {
         else {
             node.value = value;           //传来的新value传给node
         }
-
+        node.height = Math.max(getHeight(node.left), getHeight(node.right)) + 1;//维护高度
+        int balance = getBalanceFactor(node);
+        if (Math.abs(balance) > 1)
+            System.out.println("unbalaend");
         return node;
+    }
+
+    //获取平衡因子
+    private int getBalanceFactor(Node node) {
+        if (node == null)
+            return 0;
+        return getHeight(node.left) - getHeight(node.right);
+    }
+
+    //判断是否是一颗二分搜索树，思路，二分搜索树中序遍历的结果是从小到大的，所以遍历一遍把key值放进ArrayList里面
+    //再遍历一遍看是不是从小到大排序的
+    private boolean isBST() {
+        ArrayList<K> keys = new ArrayList<>();
+        inOrder(root, keys);
+        for (int i = 1; i < keys.size(); i++) {
+            if (keys.get(i - 1).compareTo(keys.get(i)) > 0)
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * 判断这个二叉树是不是平衡二叉树
+     *
+     * @return
+     */
+    public boolean isBalanced() {
+        return isBalanced(root);
+    }
+
+    /**
+     * 递归判断是否是平衡二叉树
+     * 判断左节点的平衡因子，判断右节点的平衡因子，递归判断
+     *
+     * @param node
+     * @return
+     */
+    private boolean isBalanced(Node node) {
+        if (node == null)
+            return true;
+        int balanceFactor = getBalanceFactor(node);
+        if (Math.abs(balanceFactor) > 1)
+            return false;
+        return isBalanced(node.left) && isBalanced(node.right);
+    }
+
+    private void inOrder(Node node, ArrayList<K> keys) {
+        if (node == null)
+            return;
+        inOrder(node.left, keys);
+        keys.add(node.key);
+        inOrder(node.right, keys);
     }
 
     private Node getNode(Node node, K key) {
@@ -68,7 +136,7 @@ public class BSTMap<K extends Comparable<K>, V> {
     }
 
     public void remove(K k) {
-         root = reomve(root, k);
+        root = reomve(root, k);
     }
 
     private Node reomve(Node node, K k) {
@@ -117,7 +185,7 @@ public class BSTMap<K extends Comparable<K>, V> {
         while (cur.left != null) {
             cur = cur.left;
         }
-        Node a=cur;
+        Node a = cur;
         return cur;
     }
 }
