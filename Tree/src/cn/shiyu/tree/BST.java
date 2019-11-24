@@ -19,6 +19,7 @@ public class BST<E extends Comparable<E>> {
         bst.add(14);
         bst.add(16);
         bst.add(6);
+        bst.midOrderByStack();
         System.out.println(bst.minNum());
     }
 
@@ -130,6 +131,21 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
+    //中序遍历非递归实现！！！
+    public void midOrderByStack() {
+        Stack<Node> stack = new Stack<>();
+        Node node = stack.push(root);
+        while (!stack.empty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            Node cur = stack.pop();
+            System.out.println(cur.e);
+            node = cur.right;
+        }
+    }
+
 
     public boolean contains(E e) {
         return contains(root, e);
@@ -169,18 +185,18 @@ public class BST<E extends Comparable<E>> {
     }
 
     public void remove(E e) {
-        root = reomve(root, e);
+        root = remove(root, e);
     }
 
-    private Node reomve(Node node, E e) {
+    private Node remove(Node node, E e) {
         if (node == null) {
             return null;
         }
         if (e.compareTo(node.e) > 0) {
-            node.right = reomve(node.right, e);
+            node.right = remove(node.right, e);
             return node;
         } else if (e.compareTo(node.e) < 0) {
-            node.left = reomve(node.left, e);
+            node.left = remove(node.left, e);
             return node;
         }
         return null;

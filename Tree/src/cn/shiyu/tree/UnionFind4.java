@@ -23,11 +23,11 @@ public class UnionFind4 implements UF {
         //将元素少的树根节点，挂到元素多的节点树根上去
         if (rank[pRoot] < rank[qRoot]) {
             parent[pRoot] = qRoot;
-            rank[qRoot] += rank[pRoot];
         } else if (rank[p] > rank[qRoot]) {
             parent[qRoot] = pRoot;
         } else {
-            rank[pRoot] += 1;
+            parent[qRoot] = pRoot;
+            rank[pRoot] += 1;//树的真实高度不重要，重要的是挂在谁上面
         }
     }
 

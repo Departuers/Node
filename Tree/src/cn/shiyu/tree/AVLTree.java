@@ -1,8 +1,10 @@
 package cn.shiyu.tree;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 //二分搜索树实现map
+@SuppressWarnings("all")
 public class AVLTree<K extends Comparable<K>, V> {
     private class Node {
         Node left;
@@ -34,7 +36,7 @@ public class AVLTree<K extends Comparable<K>, V> {
         return node.height;
     }
 
-    //重点！！！！！！！！！！
+    //重点！应该在添加元素时维护树的平衡
     private Node add(Node node, K key, V value) {
         if (node == null) {
             size++;
@@ -48,10 +50,45 @@ public class AVLTree<K extends Comparable<K>, V> {
             node.value = value;           //传来的新value传给node
         }
         node.height = Math.max(getHeight(node.left), getHeight(node.right)) + 1;//维护高度
-        int balance = getBalanceFactor(node);
-        if (Math.abs(balance) > 1)
-            System.out.println("unbalaend");
+        int balance = getBalanceFactor(node);//计算平衡因子
+//        if (Math.abs(balance) > 1)
+//            System.out.println("unbalaend");
+        //平衡维护
+        //LL
+        if (balance > 1 && getBalanceFactor(node.left) >= 0) {
+            return rightRotate(node);
+        }
+        //RR
+        if (balance < -1 && getBalanceFactor(node.right) <= 0) {
+            return leftRotate(node);
+        }
+        //LR
+        if (balance > 1 && getBalanceFactor(node.left) > 0) {
+            node.left = leftRotate(node.left);
+            return rightRotate(node);
+        }
+        //RL
+        if (balance < 1 && getBalanceFactor(node.left) < 0) {
+            node.right = rightRotate(node.right);
+            return leftRotate(node);
+        }
+
         return node;
+    }
+
+    //中序遍历非递归实现
+    public void midOrderByStack() {
+        Stack<Node> stack = new Stack<>();
+        Node node = stack.push(root);
+        while (!stack.empty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            Node cur = stack.pop();
+            System.out.println(cur.key);
+            node = cur.right;
+        }
     }
 
     //获取平衡因子
@@ -71,6 +108,43 @@ public class AVLTree<K extends Comparable<K>, V> {
                 return false;
         }
         return true;
+    }
+
+    /**
+     * 左旋转
+     *
+     * @param y 旧的根节点
+     * @return
+     */
+    private Node leftRotate(Node y) {
+        Node x = y.right;
+        Node T2 = x.left;
+
+        x.left = y;
+        y.right = T2;
+
+        y.height = Math.max(getHeight(y.left), getHeight(y.right)) + 1;
+        x.height = Math.max(getHeight(x.left), getHeight(x.right)) + 1;
+        return x;
+    }
+
+    /**
+     * 右旋转
+     *
+     * @param y
+     * @return
+     */
+    private Node rightRotate(Node y) {
+        Node x = y.left;
+        Node T3 = x.right;
+
+        x.right = y;
+        y.left = T3;
+
+        y.height = Math.max(getHeight(y.left), getHeight(y.right)) + 1;
+        x.height = Math.max(getHeight(x.left), getHeight(x.right)) + 1;
+
+        return x;
     }
 
     /**
@@ -136,39 +210,65 @@ public class AVLTree<K extends Comparable<K>, V> {
     }
 
     public void remove(K k) {
-        root = reomve(root, k);
+        root = remove(root, k);
     }
 
-    private Node reomve(Node node, K k) {
+    private Node remove(Node node, K k) {
         if (node == null) {
             return null;
         }
+        Node retNode;
         if (k.compareTo(node.key) > 0) {
-            node.right = reomve(node.right, k);
-            return node;
+            node.right = remove(node.right, k);
+            retNode = node;
         } else if (k.compareTo(node.key) < 0) {
-            node.left = reomve(node.left, k);
-            return node;
+            node.left = remove(node.left, k);
+            retNode = node;
         } else {
             if (node.left == null) {
                 Node rightnode = node.right;
                 node.right = null;
                 size--;
-                return rightnode;
+                retNode = rightnode;
             }
             if (node.right == null) {
                 Node leftnode = node.left;
                 node.left = null;
                 size--;
-                return leftnode;
+                retNode = leftnode;
             }
             Node successor = minNum(node.right);
-            successor.right = removeMin(node.right);
+            successor.right = remove(node.right, successor.key);
             successor.left = node.left;
 
             node.left = node.right = null;
-            return successor;
+            retNode = successor;
         }
+        retNode.height = Math.max(getHeight(retNode.left), getHeight(retNode.right)) + 1;//维护高度
+        int balance = getBalanceFactor(retNode);//计算平衡因子
+//        if (Math.abs(balance) > 1)
+//            System.out.println("unbalaend");
+        //平衡维护
+        //LL
+        if (balance > 1 && getBalanceFactor(retNode.left) >= 0) {
+            return rightRotate(retNode);
+        }
+        //RR
+        if (balance < -1 && getBalanceFactor(retNode.right) <= 0) {
+            return leftRotate(retNode);
+        }
+        //LR
+        if (balance > 1 && getBalanceFactor(retNode.left) > 0) {
+            retNode.left = leftRotate(retNode.left);
+            return rightRotate(retNode);
+        }
+        //RL
+        if (balance < 1 && getBalanceFactor(retNode.left) < 0) {
+            retNode.right = rightRotate(retNode.right);
+            return leftRotate(retNode);
+        }
+
+        return retNode;
 
     }
 

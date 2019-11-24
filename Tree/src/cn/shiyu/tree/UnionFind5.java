@@ -24,10 +24,10 @@ public class UnionFind5 implements UF {
         //将元素少的树根节点，挂到元素多的节点树根上去
         if (rank[pRoot] < rank[qRoot]) {
             parent[pRoot] = qRoot;
-            rank[qRoot] += rank[pRoot];
         } else if (rank[p] > rank[qRoot]) {
             parent[qRoot] = pRoot;
         } else {
+            parent[qRoot] = pRoot;
             rank[pRoot] += 1;
         }
     }
