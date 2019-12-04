@@ -1,10 +1,16 @@
 package cn.shiyu.Linear;
-
+@SuppressWarnings("all")
 public class LinkedMap<K, V> {
     private class Node<K, V> {
         Node next;
         K k;
         V v;
+
+        public Node(K k, V v, Node next) {
+            this.next = next;
+            this.k = k;
+            this.v = v;
+        }
 
         @Override
         public String toString() {
@@ -12,12 +18,6 @@ public class LinkedMap<K, V> {
                     "k=" + k +
                     ", v=" + v +
                     '}';
-        }
-
-        public Node(K k, V v, Node next) {
-            this.next = next;
-            this.k = k;
-            this.v = v;
         }
 
         public Node(K k) {

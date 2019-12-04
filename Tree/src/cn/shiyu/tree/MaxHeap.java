@@ -1,6 +1,7 @@
 package cn.shiyu.tree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 //二叉堆最大堆
 public class MaxHeap<E extends Comparable<E>> {
@@ -17,9 +18,7 @@ public class MaxHeap<E extends Comparable<E>> {
     //将任意数组整理成堆的形状
     public MaxHeap(E[] array) {
         data = new ArrayList<>();
-        for (int i = 0; i < array.length; i++) {
-            data.add(array[i]);
-        }
+        data.addAll(Arrays.asList(array));
         for (int i = parent(data.size() - 1); i >= 0; i--) {
             siftDown(i);
         }
@@ -58,11 +57,15 @@ public class MaxHeap<E extends Comparable<E>> {
     private void siftUp(int k) {
         //根节点不能上浮,,,,,,索引为k的值和k的父节点的值,比父节点值大就交换元素
         while (k > 0 && data.get(k).compareTo(data.get(parent(k))) > 0) {
-            E e = data.get(k);
-            data.set(k, data.get(parent(k)));
-            data.set(parent(k), e);
+            swap(k, parent(k));
             k = parent(k);
         }
+    }
+
+    private void swap(int i, int d) {
+        E e = data.get(i);
+        data.set(i, data.get(d));
+        data.set(d, e);
     }
 
     public E getMax() {
@@ -83,13 +86,12 @@ public class MaxHeap<E extends Comparable<E>> {
         while (leftchild(k) < size()) {
             int j = leftchild(k);
             if (j + 1 < size() && data.get(j + 1).compareTo(data.get(j)) > 0) {
-                j = rightchild(k);
-            }//data[j]是left和right节点中的最大值；
+                //j+1是k的右孩子，如果k有右孩子并且，右孩子比左孩子大，
+                j = rightchild(k);//就把有孩子赋值给j
+            }//data[j]是leftChild和rightChild节点中的最大值；
             if (data.get(k).compareTo(data.get(j)) >= 0)
                 break;
-            E e = data.get(j);
-            data.set(j, data.get(k));
-            data.set(k, e);
+            swap(k, j);
             k = j;
         }
     }
