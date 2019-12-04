@@ -42,7 +42,6 @@ public class Bing {
         bing.union(6, 5);
         bing.union(7, 3);
 
-
         for (int i : bing.parent) {
             System.out.print(i + "->");
         }
