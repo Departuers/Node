@@ -50,4 +50,4 @@ temp/
 bin/
 .vscode
 out/
-Test/
+/Test/
