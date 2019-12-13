@@ -1,4 +1,5 @@
 package cn.shiyu.Linear;
+
 @SuppressWarnings("all")
 public class LinkedMap<K, V> {
     private class Node<K, V> {

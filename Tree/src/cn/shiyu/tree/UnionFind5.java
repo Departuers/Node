@@ -1,6 +1,6 @@
 package cn.shiyu.tree;
 
-//最优实现
+//近最优实现
 public class UnionFind5 implements UF {
     private int[] parent;
     private int[] rank;
@@ -48,7 +48,13 @@ public class UnionFind5 implements UF {
         if (p < 0 || p >= parent.length)
             throw new IllegalArgumentException("out");
         while (p != parent[p]) {//相等代表它是个根节点
-            parent[p] = parent[parent[p]];//指向他的父节点
+            parent[p] = parent[parent[p]];//p指向他的父节点的父节点,有可能会改变树的高度
+            /**
+             *在这里没有维护rank数组中树的高度,
+             *主要是因为rank只需要知道谁相对来说比较高就可以了,
+             *并不需要存储树真实高度
+             */
+
             p = parent[p];
         }
         return p;

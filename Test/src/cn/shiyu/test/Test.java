@@ -2,45 +2,48 @@ package cn.shiyu.test;
 
 //合根植物
 public class Test {
-    public static int[] parent;
-    public static int[] rank;
+    public int[] parent;
+    public int[] rank;
 
-    public static void main(String[] args) {
-        parent = new int[12];
-        rank = new int[12];
-        for (int i = 0; i < parent.length; i++) {
-            rank[i] = 1;
+    Test(int size) {
+        parent = new int[size];
+        rank = new int[size];
+        for (int i = 0; i < size; i++) {
             parent[i] = i;
+            rank[i] = 1;
         }
-
     }
 
-    public static boolean isCone(int p, int q) {
+    Test() {
+        this(16);
+    }
+
+    public void union(int p, int q) {
+        int pRoot = find(p);
+        int qRoot = find(q);
+        if (qRoot == pRoot)
+            return;
+        if (rank[pRoot] < rank[qRoot]) {
+            parent[pRoot] = parent[qRoot];
+        } else if (rank[pRoot] > rank[qRoot]) {
+            parent[qRoot] = parent[pRoot];
+        } else {
+            parent[qRoot] = parent[pRoot];
+            rank[pRoot] += 1;
+        }
+    }
+
+    public boolean isCon(int p, int q) {
         return find(p) == find(q);
     }
 
-    public static void union(int p, int q) {
-        int pRoot = find(p);
-        int qRoot = find(q);
-        if (pRoot == qRoot)
-            return;
-        if (rank[pRoot] < rank[qRoot]) {
-            parent[qRoot] = pRoot;
-        } else if (rank[pRoot] > rank[qRoot]) {
-            parent[pRoot] = qRoot;
-        } else {
-            rank[pRoot] += 1;
-            parent[pRoot] = qRoot;
+    public int find(int p) {
+        if (p > parent.length - 1 || p < 0)
+            throw new IllegalArgumentException("out");
+        while (p != parent[p]) {
+            parent[p] = parent[parent[p]];
+            p = parent[p];
         }
-    }
-
-    public static int find(int index) {
-        if (index < 0 || index >= parent.length)
-            throw new IllegalArgumentException("Index Out");
-        while (parent[index] != index) {
-            parent[index] = parent[parent[index]];
-            index = parent[index];
-        }
-        return index;
+        return p;
     }
 }
