@@ -71,7 +71,7 @@ public class AdjSet {
     }
 
     /**
-     * 返回一个ArrayList,记录节点v分别与哪个顶点相连
+     * 返回一个Iterable,记录节点v分别与哪个顶点相连
      *
      * @param v 节点
      * @return 返回那条邻接表
@@ -108,7 +108,7 @@ public class AdjSet {
         sb.append(", E=").append(E).append('\n');
         for (int v = 0; v < V; v++) {//遍历所有顶点
             sb.append(String.format("%d : ", v));
-            for (int w : adj[v]) {//遍历其中每个顶点对应的链表
+            for (int w : adj[v]) {//遍历其中每个顶点对应的TreeSet
                 sb.append(String.format("%d ", w));
             }
             sb.append('\n');
@@ -117,7 +117,11 @@ public class AdjSet {
     }
 
     public static void main(String[] args) {
-        AdjList adjList = new AdjList("g.txt");
+        AdjSet adjList = new AdjSet("g.txt");
         System.out.println(adjList);
+        Iterable<Integer> adj = adjList.adj(3);
+        for (Integer integer : adj) {
+            System.out.println(integer);
+        }
     }
 }
