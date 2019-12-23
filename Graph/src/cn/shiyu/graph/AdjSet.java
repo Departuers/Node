@@ -95,7 +95,7 @@ public class AdjSet {
      *
      * @param v 顶点
      */
-    private void validateVertex(int v) {
+    public void validateVertex(int v) {
         if (v < 0 || v >= V) throw new IllegalArgumentException(v + "is not");
     }
 
