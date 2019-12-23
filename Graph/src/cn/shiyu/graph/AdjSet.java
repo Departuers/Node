@@ -6,13 +6,7 @@ import java.util.Scanner;
 import java.util.TreeSet;
 
 /**
- * 邻接表
- * 空间复杂度O(V+E)
- * 时间复杂度:建立邻接表O(E*V)//需要判断平行边
- * 使用HashSet哈希表O(1),//无序
- * 或者TreeSet红黑树O(logV)//保持了节点顺序,相比(哈希表)更节省空间,logV的速度也很快
- * O(1)<O(log n)<O(n)   如果n取100万,log n=200
- * 1<20<100万
+ * 邻接表(红黑树)
  */
 public class AdjSet {
     private int V;//多少个顶点
@@ -45,6 +39,10 @@ public class AdjSet {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void dfs(int v) {
+
     }
 
     //获取顶点数量
