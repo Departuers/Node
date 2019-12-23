@@ -111,3 +111,9 @@ from------->to
 邻接矩阵               O(V^2)       O(E)                    O(1)                            O(V)
 邻接表(LInkedList)     O(V+E)      O(E),如果查重O(E*V)       O(degree(v))最差就是O(V)          O(degree(v))最差就是O(V)
 邻接表(TreeSet)        O(V+E)      O(ElogV)                 O(Log V)                         O(degree(v))最差就是O(V)
+
+遍历的意义:
+数据结构是用来存储数据的,把数据存储进去之后,必须有一种方法能遍历数据结构中所存储的数据
+在遍历过程中进行查找,匹配之类的工作
+
+图的深度优先遍历(DFS)
