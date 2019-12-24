@@ -49,7 +49,7 @@ public class GraphDFS {
         GraphDFS g = new GraphDFS(s);
         Iterable<Integer> order = g.postOrder();
         for (Integer o : order) {
-            System.out.println(o);
+            System.out.print(o + " ");
         }
     }
 }

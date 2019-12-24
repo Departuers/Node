@@ -1,6 +1,6 @@
 package cn.shiyu.tree;
 
-//近最优实现
+//最优实现
 public class UnionFind5 implements UF {
     private int[] parent;
     private int[] rank;

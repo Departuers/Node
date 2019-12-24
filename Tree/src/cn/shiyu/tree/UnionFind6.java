@@ -1,6 +1,6 @@
 package cn.shiyu.tree;
 
-//最优实现
+//路径压缩到树只有2层
 public class UnionFind6 implements UF {
     private int[] parent;
     private int[] rank;
