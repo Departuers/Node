@@ -25,10 +25,10 @@ public class GraphBFS {
     public void bfs(int s) {
         Queue<Integer> queue = new LinkedList<>();
         queue.add(s);
+        visited[s] = true;
         while (!queue.isEmpty()) {
             Integer v = queue.remove();
             order.add(v);
-            visited[v] = true;
             for (Integer w : G.adj(v)) {//把与v相邻的元素入队
                 if (!visited[w]) {
                     queue.add(w);
@@ -43,7 +43,7 @@ public class GraphBFS {
     }
 
     public static void main(String[] args) {
-        AdjSet s = new AdjSet("g.txt");
+        AdjSet s = new AdjSet("g2.txt");
         GraphBFS b = new GraphBFS(s);
         System.out.println(b.order());
     }
