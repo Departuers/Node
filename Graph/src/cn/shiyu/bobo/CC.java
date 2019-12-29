@@ -31,7 +31,7 @@ public class CC {
         }
     }
 
-    public int CcCount() {
+    public int Count() {
         return ccCount;
     }
 

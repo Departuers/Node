@@ -94,7 +94,7 @@ public class CC2 {
         System.out.println();
         ArrayList<Integer>[] ccc = g.components();
         for (int ccid = 0; ccid < ccc.length; ccid++) {
-            System.out.print(ccid + ": ");
+            System.out.print("联通增量"+ccid + ": ");
             for (Integer w : ccc[ccid]) {
                 System.out.print(w + " ");
             }
