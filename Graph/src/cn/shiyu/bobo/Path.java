@@ -1,4 +1,4 @@
-package cn.shiyu.graph;
+package cn.shiyu.bobo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,14 +8,14 @@ import java.util.Collections;
  * 求两点之间的路径是什么,仅仅是这两点,不需要求多余数据
  */
 public class Path {
-    private AdjSet G;
+    private Graph G;
     private boolean visited[];
     private int s;//
     private int t;
     private int[] pre;//每个顶点需要存储它前面那个节点,也就是从哪来的
 
     //深度优先遍历从0开始
-    public Path(AdjSet G, int s, int t) {
+    public Path(Graph G, int s, int t) {
         G.validateVertex(t);
         G.validateVertex(s);
 
@@ -81,7 +81,7 @@ public class Path {
     }
 
     public static void main(String[] args) {
-        AdjSet s = new AdjSet("g.txt");
+        Graph s = new Graph("g.txt");
         Path ss = new Path(s, 0, 1);
         System.out.println(ss.path());
         System.out.println();

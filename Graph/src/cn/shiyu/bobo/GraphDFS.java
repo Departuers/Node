@@ -1,4 +1,4 @@
-package cn.shiyu.graph;
+package cn.shiyu.bobo;
 
 import java.util.ArrayList;
 
@@ -9,11 +9,11 @@ public class GraphDFS {
     private ArrayList<Integer> pre = new ArrayList<>();//存储图的深度优先前序遍历
     private ArrayList<Integer> post = new ArrayList<>();//存储图的深度优先后序遍历
 
-    private AdjSet G;
+    private Graph G;
     private boolean visited[];
 
     //深度优先遍历从0开始
-    public GraphDFS(AdjSet G) {
+    public GraphDFS(Graph G) {
         this.G = G;
         visited = new boolean[G.getV()];
         // dfs(0);没有跟其他顶点联通的不会被遍历到
@@ -45,7 +45,7 @@ public class GraphDFS {
     }
 
     public static void main(String[] args) {
-        AdjSet s = new AdjSet("g.txt");
+        Graph s = new Graph("g.txt");
         GraphDFS g = new GraphDFS(s);
         Iterable<Integer> order = g.postOrder();
         for (Integer o : order) {

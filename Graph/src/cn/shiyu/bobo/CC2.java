@@ -1,4 +1,4 @@
-package cn.shiyu.graph;
+package cn.shiyu.bobo;
 
 
 import java.util.ArrayList;
@@ -10,11 +10,11 @@ import java.util.Arrays;
  * 主要是visited改成int[]
  */
 public class CC2 {
-    private AdjSet G;
+    private Graph G;
     private int[] visited;
     private int ccCount = 0;
 
-    public CC2(AdjSet G) {
+    public CC2(Graph G) {
         this.G = G;
         visited = new int[G.getV()];
         Arrays.fill(visited, -1);//值为-1代表没有遍历到
@@ -86,7 +86,7 @@ public class CC2 {
     }
 
     public static void main(String[] args) {
-        AdjSet s = new AdjSet("g.txt");
+        Graph s = new Graph("g.txt");
         CC2 g = new CC2(s);
         System.out.println(g.CcCount());
         System.out.println(g.isConnected(0, 5));

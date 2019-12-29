@@ -1,16 +1,16 @@
-package cn.shiyu.graph;
+package cn.shiyu.bobo;
 
 /**
  * 二分图
  */
 public class Bipartition {
-    private AdjSet G;
+    private Graph G;
     private boolean visited[];
     private int[] colors;
     private boolean isBirpartite = true;
 
     //深度优先遍历从0开始
-    public Bipartition(AdjSet G) {
+    public Bipartition(Graph G) {
         this.G = G;
         visited = new boolean[G.getV()];
         colors = new int[G.getV()];
@@ -46,7 +46,7 @@ public class Bipartition {
     }
 
     public static void main(String[] args) {
-        AdjSet s = new AdjSet("g3.txt");
+        Graph s = new Graph("g3.txt");
         Bipartition b=new Bipartition(s);
         System.out.println(b.isBirpartite);
     }

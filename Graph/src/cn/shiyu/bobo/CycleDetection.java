@@ -1,15 +1,15 @@
-package cn.shiyu.graph;
+package cn.shiyu.bobo;
 
 /**
  * 环检测
  */
 public class CycleDetection {
-    private AdjSet G;
+    private Graph G;
     private boolean visited[];
     private boolean haCycle;
 
     //深度优先遍历从0开始
-    public CycleDetection(AdjSet G) {
+    public CycleDetection(Graph G) {
         this.G = G;
         visited = new boolean[G.getV()];
         // dfs(0);没有跟其他顶点联通的不会被遍历到
@@ -47,10 +47,10 @@ public class CycleDetection {
     }
 
     public static void main(String[] args) {
-        AdjSet s = new AdjSet("g.txt");
+        Graph s = new Graph("g.txt");
         CycleDetection c = new CycleDetection(s);
         System.out.println(c.haCycle());
-        AdjSet s1 = new AdjSet("g2.txt");
+        Graph s1 = new Graph("g2.txt");
         CycleDetection c1 = new CycleDetection(s1);
         System.out.println(c1.haCycle());
     }

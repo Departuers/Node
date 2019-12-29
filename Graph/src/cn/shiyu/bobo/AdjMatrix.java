@@ -1,35 +1,30 @@
-package cn.shiyu.graph;
+package cn.shiyu.bobo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * 邻接表
- * 空间复杂度O(V+E)
- * 时间复杂度:建立邻接表O(E*V)//需要判断平行边
- * 使用HashSet哈希表O(1),//无序
- * 或者TreeSet红黑树O(logV)//保持了节点顺序,相比(哈希表)更节省空间,logV的速度也很快
- * O(1)<O(log n)<O(n)   如果n取100万,log n=200
- * 1<20<100万
+ * 邻接矩阵(主要处理无向无权简单图)
+ * 空间复杂度O(V^2)  瓶颈!!!节点多了消耗太大资源,稀疏图
+ * 时间复杂度
+ * 建立图,也就是二维数组,O(E),对两个顶点,赋值为1
+ * 查看两个节点是否相邻O(1)
+ * 求一个点的相邻节点O(V)   瓶颈!!!
  */
-public class AdjList {
+public class AdjMatrix {
     private int V;//多少个顶点
     private int E;//多少条边
-    private LinkedList<Integer>[] adj;//图的结构
+    private int[][] adj;//图的结构
 
-    public AdjList(String fileName) {
+    public AdjMatrix(String fileName) {
         File file = new File(fileName);
         try (Scanner sc = new Scanner(file)) {
             V = sc.nextInt();
             if (V < 0) throw new IllegalArgumentException("V Must >=0");
-            adj = new LinkedList[V];
-            for (int i = 0; i < V; i++) {
-                adj[i] = new LinkedList<>();
-            }
-
-            E = sc.nextInt();//边的数量
+            adj = new int[V][V];
+            E = sc.nextInt();
             if (E < 0) throw new IllegalArgumentException("E Must >=0");
             for (int i = 0; i < E; i++) {
                 int a = sc.nextInt();
@@ -37,10 +32,10 @@ public class AdjList {
                 int b = sc.nextInt();
                 validateVertex(b);//对顶点进行合法性判断
                 if (a == b) throw new IllegalArgumentException("自环边非法");
-                if (adj[a].contains(b)) throw new IllegalArgumentException("平行边非法");//跟链表长度有关,最多可以达到V-1(节点数量-1)
+                if (adj[a][b] == 1) throw new IllegalArgumentException("平行边非法");
 
-                adj[a].add(b);//无向图,对称,所以两个都要赋值为1
-                adj[b].add(a);
+                adj[a][b] = 1;//无向图,对称,所以两个都要赋值为1
+                adj[b][a] = 1;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -67,18 +62,25 @@ public class AdjList {
     public boolean hasEdge(int v, int w) {
         validateVertex(v);
         validateVertex(w);
-        return adj[v].contains(w);
+        return adj[v][w] == 1;
     }
 
     /**
-     * 返回一个ArrayList,记录节点v分别与哪个顶点相连
+     * 查看一个顶点,分别与哪个顶点相连
      *
-     * @param v 节点
-     * @return 返回那条邻接表
+     * @param v 输入边
+     * @return res记录, 与v相连的每个顶点
      */
-    public LinkedList<Integer> adj(int v) {
+    public ArrayList<Integer> adj(int v) {
         validateVertex(v);
-        return adj[v];
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = 0; i < V; i++) {
+            //看做邻接矩阵,第v排,有多少个1,就是
+            //再res记录,与v相连的每个顶点
+            if (adj[v][i] == 1)
+                res.add(i);
+        }
+        return res;
     }
 
     /**
@@ -88,7 +90,7 @@ public class AdjList {
      * @return 边的数量
      */
     public int degree(int v) {
-        return adj(v).size();//复用方法
+        return adj(v).size();
     }
 
     /**
@@ -105,10 +107,9 @@ public class AdjList {
         final StringBuilder sb = new StringBuilder();
         sb.append("V=").append(V);
         sb.append(", E=").append(E).append('\n');
-        for (int v = 0; v < V; v++) {//遍历所有顶点
-            sb.append(String.format("%d : ", v));
-            for (int w : adj[v]) {//遍历其中每个顶点对应的链表
-                sb.append(String.format("%d ", w));
+        for (int v = 0; v < V; v++) {
+            for (int j = 0; j < V; j++) {
+                sb.append(String.format("%d", adj[v][j])).append(" ");
             }
             sb.append('\n');
         }
@@ -116,7 +117,7 @@ public class AdjList {
     }
 
     public static void main(String[] args) {
-        AdjList adjList = new AdjList("g.txt");
-        System.out.println(adjList);
+        AdjMatrix adjMatrix = new AdjMatrix("g.txt");
+        System.out.println(adjMatrix);
     }
 }

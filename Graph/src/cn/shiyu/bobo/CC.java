@@ -1,4 +1,4 @@
-package cn.shiyu.graph;
+package cn.shiyu.bobo;
 
 /**
  * 1.求无向图的联通分量(Connected Component)个数
@@ -10,11 +10,11 @@ package cn.shiyu.graph;
  * 就可以求出有多少联通分量了
  */
 public class CC {
-    private AdjSet G;
+    private Graph G;
     private boolean[] visited;
     private int ccCount = 0;
 
-    public CC(AdjSet G) {
+    public CC(Graph G) {
         this.G = G;
         visited = new boolean[G.getV()];
         /**
@@ -45,7 +45,7 @@ public class CC {
     }
 
     public static void main(String[] args) {
-        AdjSet s = new AdjSet("g.txt");
+        Graph s = new Graph("g.txt");
         CC g = new CC(s);
         System.out.println(g.ccCount);
     }

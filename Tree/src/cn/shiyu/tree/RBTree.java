@@ -3,9 +3,9 @@ package cn.shiyu.tree;
 import java.util.ArrayList;
 import java.util.Stack;
 
-//AVL树
+//二分搜索树实现map
 @SuppressWarnings("all")
-public class AVLTree<K extends Comparable<K>, V> {
+public class RBTree<K extends Comparable<K>, V> {
     private class Node {
         Node left;
         Node right;
@@ -126,6 +126,11 @@ public class AVLTree<K extends Comparable<K>, V> {
         y.height = Math.max(getHeight(y.left), getHeight(y.right)) + 1;
         x.height = Math.max(getHeight(x.left), getHeight(x.right)) + 1;
         return x;
+    }
+
+    //颜色翻转
+    private void flipColors(Node node) {
+
     }
 
     /**

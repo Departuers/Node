@@ -1,4 +1,4 @@
-package cn.shiyu.graph;
+package cn.shiyu.bobo;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -9,13 +9,13 @@ import java.util.Queue;
  */
 public class USSSPath {
 
-    private AdjSet G;
+    private Graph G;
     private boolean visited[];
     private int[] pre;
     private int[] dis;
     private int s;
 
-    public USSSPath(AdjSet G, int s) {
+    public USSSPath(Graph G, int s) {
         this.s = s;
         this.G = G;
         visited = new boolean[G.getV()];
@@ -57,7 +57,7 @@ public class USSSPath {
     }
 
     public static void main(String[] args) {
-        AdjSet s = new AdjSet("g.txt");
+        Graph s = new Graph("g.txt");
         USSSPath b = new USSSPath(s, 0);
         System.out.println(b.ids(6));
     }

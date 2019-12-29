@@ -1,15 +1,15 @@
-package cn.shiyu.graph;
+package cn.shiyu.bobo;
 
 import java.util.*;
 
 public class SingleSourcePathByBFS {
 
-    private AdjSet G;
+    private Graph G;
     private boolean visited[];
     private int[] pre;
     private int s;
 
-    public SingleSourcePathByBFS(AdjSet G, int s) {
+    public SingleSourcePathByBFS(Graph G, int s) {
         this.G = G;
         this.s = s;
         visited = new boolean[G.getV()];
@@ -60,7 +60,7 @@ public class SingleSourcePathByBFS {
     }
 
     public static void main(String[] args) {
-        AdjSet s = new AdjSet("g.txt");
+        Graph s = new Graph("g.txt");
         SingleSourcePathByBFS ssp = new SingleSourcePathByBFS(s, 0);
 
         System.out.println(ssp.path(6));
