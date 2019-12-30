@@ -71,7 +71,7 @@ public class CC2 {
     }
 
     /**
-     * 用来表示联通增量
+     * DFS用来表示联通分量
      *
      * @param v    从哪个节点开始
      * @param ccid 每个联通增量ID
