@@ -3,13 +3,11 @@ package cn.shiyu.bobo;
 import java.util.Arrays;
 
 /**
- * 最短路径之Dijkstra算法
+ * 最短路径之Dijkstra算法(无法处理负权边)
  * 带权图的单源最短路径是可以通过贪心选择得到全局最优解
  * 每步选择:选择一个节点,使得到达t更近
  * 选择寻找节点中距s节点最近的点,及其到s的路径,最终求得s到t的最短路径
- * <p>
- * 具体实现:维护一个已经被探索过的点集S,S中我们已经得到了从原点a到点u的最短路径d(u)
- * 初始化时S={a}//点集开始只包括原点   d(a)=0//原点到原点距离为0
+ * 思想:从源点出发,每次选择离源点最近的一个顶点前进,然后以该顶点作为中心拓展,最终得到源点到其余所有点的路径
  */
 @SuppressWarnings("all")
 public class Dijkstra {
@@ -32,12 +30,11 @@ public class Dijkstra {
         while (true) {
             int cur = -1, curdis = Integer.MAX_VALUE;
             for (int v = 0; v < G.V(); v++) {//遍历所有节点
-                if (!visited[v] && dis[v] < curdis) {//如果节点没被访问过,并且
+                if (!visited[v] && dis[v] < curdis) {//寻找节点未被访问过,并且源点到v的距离<curdis
                     curdis = dis[v];
                     cur = v;
                 }
             }
-
             if (cur == -1) break;
             visited[cur] = true;
             for (int w : G.adj(cur))
