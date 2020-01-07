@@ -1,5 +1,7 @@
 package cn.shiyu.bobo;
 
+import cn.shiyu.bobo.CC.CC2;
+
 /**
  * 欧拉回路
  */

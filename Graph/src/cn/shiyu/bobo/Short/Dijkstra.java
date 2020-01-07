@@ -1,4 +1,6 @@
-package cn.shiyu.bobo;
+package cn.shiyu.bobo.Short;
+
+import cn.shiyu.bobo.WeightedGraph;
 
 import java.util.Arrays;
 
@@ -68,7 +70,7 @@ public class Dijkstra {
     }
 
     public static void main(String[] args) {
-        WeightedGraph g = new WeightedGraph("g6.txt");
+        WeightedGraph g = new WeightedGraph("g4.txt");
         Dijkstra dij = new Dijkstra(g, 0);
         for (int v = 0; v < g.V(); v++) {
             System.out.println(dij.distTo(v) + " ");

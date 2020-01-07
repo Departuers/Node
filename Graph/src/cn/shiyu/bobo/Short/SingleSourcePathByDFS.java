@@ -1,4 +1,6 @@
-package cn.shiyu.bobo;
+package cn.shiyu.bobo.Short;
+
+import cn.shiyu.bobo.Graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,14 +8,14 @@ import java.util.Collections;
 /**
  * 单源路径(使用DFS是实现)
  */
-public class SingleSourcePath {
+public class SingleSourcePathByDFS {
     private Graph G;
     private boolean visited[];
     private int s;//单源路径,s就代表源
     private int[] pre;//每个顶点需要存储它前面那个节点,也就是从哪来的
 
     //深度优先遍历从0开始
-    public SingleSourcePath(Graph G, int s) {
+    public SingleSourcePathByDFS(Graph G, int s) {
         G.validateVertex(s);
         this.G = G;
         this.s = s;
@@ -63,7 +65,7 @@ public class SingleSourcePath {
 
     public static void main(String[] args) {
         Graph s = new Graph("g.txt");
-        SingleSourcePath ssp = new SingleSourcePath(s, 0);
+        SingleSourcePathByDFS ssp = new SingleSourcePathByDFS(s, 0);
         Iterable<Integer> path = ssp.path(6);
         System.out.println(path);
     }

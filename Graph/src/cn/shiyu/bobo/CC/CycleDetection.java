@@ -1,4 +1,6 @@
-package cn.shiyu.bobo;
+package cn.shiyu.bobo.CC;
+
+import cn.shiyu.bobo.Graph;
 
 /**
  * 环检测

@@ -1,4 +1,8 @@
-package cn.shiyu.bobo;
+package cn.shiyu.bobo.MinimumTree;
+
+import cn.shiyu.bobo.CC.CCByWeight;
+import cn.shiyu.bobo.WeightedEdge;
+import cn.shiyu.bobo.WeightedGraph;
 
 import java.util.ArrayList;
 

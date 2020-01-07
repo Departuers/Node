@@ -1,4 +1,6 @@
-package cn.shiyu.bobo;
+package cn.shiyu.bobo.Short;
+
+import cn.shiyu.bobo.Graph;
 
 import java.util.*;
 

@@ -1,4 +1,6 @@
-package cn.shiyu.bobo;
+package cn.shiyu.bobo.CC;
+
+import cn.shiyu.bobo.Graph;
 
 /**
  * 1.求无向图的联通分量(Connected Component)个数

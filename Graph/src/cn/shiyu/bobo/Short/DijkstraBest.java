@@ -1,4 +1,6 @@
-package cn.shiyu.bobo;
+package cn.shiyu.bobo.Short;
+
+import cn.shiyu.bobo.WeightedGraph;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;
@@ -89,7 +91,7 @@ public class DijkstraBest {
     }
 
     public static void main(String[] args) {
-        WeightedGraph g = new WeightedGraph("g6.txt");
+        WeightedGraph g = new WeightedGraph("g4.txt");
         DijkstraBest dij = new DijkstraBest(g, 0);
         for (int v = 0; v < g.V(); v++)
             System.out.print(dij.distTo(v) + " ");
