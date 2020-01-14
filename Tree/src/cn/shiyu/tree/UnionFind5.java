@@ -54,7 +54,6 @@ public class UnionFind5 implements UF {
              *主要是因为rank只需要知道谁相对来说比较高就可以了,
              *并不需要存储树真实高度
              */
-
             p = parent[p];
         }
         return p;

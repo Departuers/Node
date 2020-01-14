@@ -45,7 +45,7 @@ public class SegmentTree<E> {
     }
 
     public int leftChild(int index) {
-        return index * 2 + 1;
+        return index *  2 + 1;
     }
 
     public int rightChild(int index) {
