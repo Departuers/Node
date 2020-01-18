@@ -73,6 +73,5 @@ public class SparseArray {
         for (int i = 0; i < end.length; i++) {
             System.out.println(Arrays.toString(end[i]));
         }
-
     }
 }
