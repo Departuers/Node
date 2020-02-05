@@ -8,16 +8,16 @@ public class MaxHeap<E extends Comparable<E>> {
     private ArrayList<E> data;
 
     public MaxHeap(int data) {
-        this.data = new ArrayList<>(data);
+        this.data = new ArrayList<E>(data);
     }
 
     public MaxHeap() {
-        this.data = new ArrayList<>();
+        this.data = new ArrayList<E>();
     }
 
     //将任意数组整理成堆的形状
     public MaxHeap(E[] array) {
-        data = new ArrayList<>();
+        data = new ArrayList<E>();
         data.addAll(Arrays.asList(array));
         for (int i = parent(data.size() - 1); i >= 0; i--) {
             siftDown(i);
@@ -112,7 +112,7 @@ public class MaxHeap<E extends Comparable<E>> {
     }
 
     public static void main(String[] args) {
-        MaxHeap<Integer> maxHeap = new MaxHeap<>(12);
+        MaxHeap<Integer> maxHeap = new MaxHeap<Integer>(12);
         maxHeap.add(123);
         System.out.println(maxHeap);
         maxHeap.add(542);
@@ -127,7 +127,7 @@ public class MaxHeap<E extends Comparable<E>> {
         System.out.println(maxHeap);
         maxHeap.extractMax();
         System.out.println(maxHeap);
-        MaxHeap<Integer> a = new MaxHeap<>(new Integer[]{21, 314, 13, 114, 2, 312, 312, 12231, 312, 312, 13, 15, 22, 3416, 4, 53, 45});
+        MaxHeap<Integer> a = new MaxHeap<Integer>(new Integer[]{21, 314, 13, 114, 2, 312, 312, 12231, 312, 312, 13, 15, 22, 3416, 4, 53, 45});
         System.out.println(a);
         a.add(168657);
         System.out.println(a);

@@ -48,7 +48,7 @@ public class DijkstraBest {
         dis[s] = 0;
 
         visited = new boolean[G.V()];
-        PriorityQueue<Node> pq = new PriorityQueue<>();
+        PriorityQueue<Node> pq = new PriorityQueue<Node>();
         pq.add(new Node(s, 0));//源点到源点自身距离为0
 
         while (!pq.isEmpty()) {

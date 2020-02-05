@@ -21,12 +21,13 @@ public class AdjList {
 
     public AdjList(String fileName) {
         File file = new File(fileName);
-        try (Scanner sc = new Scanner(file)) {
+        try{
+            Scanner sc = new Scanner(file);
             V = sc.nextInt();
             if (V < 0) throw new IllegalArgumentException("V Must >=0");
             adj = new LinkedList[V];
             for (int i = 0; i < V; i++) {
-                adj[i] = new LinkedList<>();
+                adj[i] = new LinkedList<Integer>();
             }
 
             E = sc.nextInt();//边的数量
@@ -71,7 +72,7 @@ public class AdjList {
     }
 
     /**
-     * 返回一个ArrayList,记录节点v分别与哪个顶点相连
+     * 返回一个LinkedList,记录节点v分别与哪个顶点相连
      *
      * @param v 节点
      * @return 返回那条邻接表
@@ -82,7 +83,7 @@ public class AdjList {
     }
 
     /**
-     * 查看v点有多少条边
+     * 查看v点有多少条边与之相连
      *
      * @param v 传入的点
      * @return 边的数量

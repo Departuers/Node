@@ -5,7 +5,7 @@ package cn.shiyu.bobo;
  */
 public class Bipartition {
     private Graph G;
-    private boolean visited[];
+    private boolean[] visited;
     private int[] colors;
     private boolean isBirpartite = true;
 
@@ -33,7 +33,7 @@ public class Bipartition {
         for (Integer w : G.adj(v)) {
             if (!visited[w]) {
                 if (!dfs(w, 1 - color)) return false;
-                //原来的颜色是1,传进去的就是0就是(1-1),原来颜色是0,那么穿进去的颜色就是1,就是1-0
+                //原来的颜色是1,传进去的就是0就是(1-1),原来颜色是0,那么穿进去的颜色就是1,就是(1-0)
             } else if (colors[w] == colors[v]) {
                 return false;
             }
@@ -47,7 +47,7 @@ public class Bipartition {
 
     public static void main(String[] args) {
         Graph s = new Graph("g3.txt");
-        Bipartition b=new Bipartition(s);
+        Bipartition b = new Bipartition(s);
         System.out.println(b.isBirpartite);
     }
 }

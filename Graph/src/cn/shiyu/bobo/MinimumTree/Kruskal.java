@@ -20,17 +20,17 @@ public class Kruskal {
 
     public Kruskal(WeightedGraph g) {
         this.G = g;
-        mst = new ArrayList<>();
+        mst = new ArrayList<WeightedEdge>();
         CCByWeight cc = new CCByWeight(g);
         if (cc.count() > 1) return;//超过一个联通分量,不处理
-        ArrayList<WeightedEdge> edges = new ArrayList<>();//存储边集
+        ArrayList<WeightedEdge> edges = new ArrayList<WeightedEdge>();//存储边集
         for (int v = 0; v < G.V(); v++) {
             for (Integer w : G.adj(v)) {
                 if (v < w)
                     edges.add(new WeightedEdge(v, w, G.getWeight(v, w)));//把每条边都加入边集
             }
         }
-        Collections.sort(edges);//对边集进行排序
+        Collections.sort(edges);//对边集进行排序,可以用优先队列优化
         UnionFind5 uf = new UnionFind5(G.V());//并查集
         for (WeightedEdge edge : edges) {
             int v = edge.getV();

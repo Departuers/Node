@@ -18,7 +18,7 @@ public class Prim {
 
     public Prim(WeightedGraph g) {
         this.G = g;
-        mst = new ArrayList<>();
+        mst = new ArrayList<WeightedEdge>();
         CCByWeight cc = new CCByWeight(g);
         if (cc.count() > 1) return;//超过一个联通分量,不处理
         boolean[] visited = new boolean[G.V()];//记录已经访问的节点

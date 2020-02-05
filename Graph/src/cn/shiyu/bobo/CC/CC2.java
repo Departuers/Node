@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * 2.具体求解无向图的联通分量,
+ * 2.具体求解无向无权图的联通分量,
  * 每个联通分量中有多少个节点,每个联通分量的节点分别是哪个
  * 主要是visited改成int[]
  */
@@ -21,8 +21,7 @@ public class CC2 {
         visited = new int[G.getV()];
         Arrays.fill(visited, -1);//值为-1代表没有遍历到
         /**
-         * 实现现象:Visited使用int数组,数组中元素的值为0代表它们是一个联通分量
-         * 值为1代表它们是一个联通分量,是一个整体,
+         * 实现现象:Visited使用int数组,数组中元素的值相同,代表它们是相同的联通分量
          * 有点并查集思想,把一个联通分量的值,在visited数组中用一个非-1数字表示
          *
          */
@@ -63,7 +62,7 @@ public class CC2 {
         //ccCount代表有多少联通分量
         ArrayList<Integer>[] res = new ArrayList[ccCount];
         for (int i = 0; i < ccCount; i++) {
-            res[i] = new ArrayList<>();
+            res[i] = new ArrayList<Integer>();
         }
         for (int v = 0; v < G.getV(); v++) {
             res[visited[v]].add(v);
@@ -96,7 +95,7 @@ public class CC2 {
         System.out.println();
         ArrayList<Integer>[] ccc = g.components();
         for (int ccid = 0; ccid < ccc.length; ccid++) {
-            System.out.print("联通增量"+ccid + ": ");
+            System.out.print("联通增量" + ccid + ": ");
             for (Integer w : ccc[ccid]) {
                 System.out.print(w + " ");
             }

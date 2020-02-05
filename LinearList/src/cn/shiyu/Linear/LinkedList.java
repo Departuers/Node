@@ -2,7 +2,7 @@ package cn.shiyu.Linear;
 
 public class LinkedList<E> {
     public static void main(String[] args) {
-        LinkedList<Integer> list = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<Integer>();
         list.addLast(13);
         list.addLast(213);
         list.addLast(2123);

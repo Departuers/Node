@@ -1,4 +1,6 @@
-package cn.shiyu.bobo;
+package cn.shiyu.bobo.traversal;
+
+import cn.shiyu.bobo.Graph;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -9,8 +11,8 @@ import java.util.Queue;
  */
 public class GraphBFS {
     private Graph G;
-    private boolean visited[];
-    private ArrayList<Integer> order = new ArrayList<>();//存储遍历结果
+    private boolean[] visited;
+    private ArrayList<Integer> order = new ArrayList<Integer>();//存储遍历结果
 
     public GraphBFS(Graph G) {
         this.G = G;
@@ -23,7 +25,7 @@ public class GraphBFS {
     }
 
     public void bfs(int s) {
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Integer> queue = new LinkedList<Integer>();
         queue.add(s);
         visited[s] = true;
         while (!queue.isEmpty()) {

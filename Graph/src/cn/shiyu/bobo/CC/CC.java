@@ -3,7 +3,7 @@ package cn.shiyu.bobo.CC;
 import cn.shiyu.bobo.Graph;
 
 /**
- * 1.求无向图的联通分量(Connected Component)个数
+ * 1.求无向无权图的联通分量(Connected Component)个数
  * 对于无向图:一张图的所有顶点,不一定都是连接起来的,一个互相连接的一部分,就被称为一个联通分量
  * 比如在一个公路系统,每个点表示一个城市,两个节点相连表示两个城市之间有公路联通,
  * 求出联通分量就可以求出在这个地图上有多少独立区域

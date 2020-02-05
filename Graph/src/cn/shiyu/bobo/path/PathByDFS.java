@@ -1,4 +1,6 @@
-package cn.shiyu.bobo;
+package cn.shiyu.bobo.path;
+
+import cn.shiyu.bobo.Graph;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,15 +9,15 @@ import java.util.Collections;
 /**
  * 求两点之间的路径是什么,仅仅是这两点,不需要求多余数据
  */
-public class Path {
+public class PathByDFS {
     private Graph G;
-    private boolean visited[];
+    private boolean[] visited;
     private int s;//
     private int t;
     private int[] pre;//每个顶点需要存储它前面那个节点,也就是从哪来的
 
     //深度优先遍历从0开始
-    public Path(Graph G, int s, int t) {
+    public PathByDFS(Graph G, int s, int t) {
         G.validateVertex(t);
         G.validateVertex(s);
 
@@ -41,10 +43,11 @@ public class Path {
     private boolean dfs(int v, int parent) {
         visited[v] = true;
         pre[v] = parent;
-        if (v == t) return true;
+        if (v == t) return true;//在这里终止
         for (Integer w : G.adj(v)) {//遍历v的相邻节点
             if (!visited[w]) {
-                if (dfs(w, v)) return true;
+                if (dfs(w, v))
+                    return true;
                 //因为w是从v过来的,递归的看能不能从v的相邻节点到达t
             }
         }
@@ -68,7 +71,7 @@ public class Path {
      * @return 可遍历的:存的是路径
      */
     public Iterable<Integer> path() {
-        ArrayList<Integer> res = new ArrayList<>();
+        ArrayList<Integer> res = new ArrayList<Integer>();
         if (!isConnected(t)) return res;//无法到达节点t
         int cur = t;//用来暂存,用目标顶点往回走
         while (cur != s) {//从目标顶点走到源顶点,直到找到源,
@@ -82,10 +85,10 @@ public class Path {
 
     public static void main(String[] args) {
         Graph s = new Graph("g.txt");
-        Path ss = new Path(s, 0, 1);
+        PathByDFS ss = new PathByDFS(s, 0, 1);
         System.out.println(ss.path());
         System.out.println();
-        Path ss1 = new Path(s, 0, 6);
+        PathByDFS ss1 = new PathByDFS(s, 0, 6);
         System.out.println(ss1.path());
     }
 }

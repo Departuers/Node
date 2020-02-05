@@ -7,6 +7,8 @@ import java.util.TreeSet;
 
 /**
  * 邻接表(红黑树)
+ * 由于TreeSet是满足二分搜索树的基本性质
+ * TreeSet遍历时使用中序遍历,是有序的!
  */
 public class Graph {
     private int V;//多少个顶点
@@ -15,12 +17,13 @@ public class Graph {
 
     public Graph(String fileName) {
         File file = new File(fileName);
-        try (Scanner sc = new Scanner(file)) {
+        try {
+            Scanner sc = new Scanner(file);
             V = sc.nextInt();
             if (V < 0) throw new IllegalArgumentException("V Must >=0");
             adj = new TreeSet[V];
             for (int i = 0; i < V; i++) {
-                adj[i] = new TreeSet<>();
+                adj[i] = new TreeSet<Integer>();
             }
 
             E = sc.nextInt();//边的数量

@@ -21,7 +21,7 @@ public class GraphNode {
 
     public void add(GraphNode node) {
         if (this.neighbors == null) {
-            this.neighbors = new ArrayList<>();
+            this.neighbors = new ArrayList<GraphNode>();
         }
         this.neighbors.add(node);
     }

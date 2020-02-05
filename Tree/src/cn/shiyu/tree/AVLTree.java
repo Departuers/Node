@@ -78,7 +78,7 @@ public class AVLTree<K extends Comparable<K>, V> {
 
     //中序遍历非递归实现
     public void midOrderByStack() {
-        Stack<Node> stack = new Stack<>();
+        Stack<Node> stack = new Stack<Node>();
         Node node = stack.push(root);
         while (!stack.empty() || node != null) {
             while (node != null) {
@@ -101,7 +101,7 @@ public class AVLTree<K extends Comparable<K>, V> {
     //判断是否是一颗二分搜索树，思路，二分搜索树中序遍历的结果是从小到大的，所以遍历一遍把key值放进ArrayList里面
     //再遍历一遍看是不是从小到大排序的
     private boolean isBST() {
-        ArrayList<K> keys = new ArrayList<>();
+        ArrayList<K> keys = new ArrayList<K>();
         inOrder(root, keys);
         for (int i = 1; i < keys.size(); i++) {
             if (keys.get(i - 1).compareTo(keys.get(i)) > 0)

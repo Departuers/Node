@@ -20,7 +20,9 @@ public class AdjMatrix {
 
     public AdjMatrix(String fileName) {
         File file = new File(fileName);
-        try (Scanner sc = new Scanner(file)) {
+        //  try (Scanner sc = new Scanner(file)) {
+        try {
+            Scanner sc = new Scanner(file);
             V = sc.nextInt();
             if (V < 0) throw new IllegalArgumentException("V Must >=0");
             adj = new int[V][V];
@@ -68,12 +70,12 @@ public class AdjMatrix {
     /**
      * 查看一个顶点,分别与哪个顶点相连
      *
-     * @param v 输入边
+     * @param v 输入顶点
      * @return res记录, 与v相连的每个顶点
      */
     public ArrayList<Integer> adj(int v) {
         validateVertex(v);
-        ArrayList<Integer> res = new ArrayList<>();
+        ArrayList<Integer> res = new ArrayList<Integer>();
         for (int i = 0; i < V; i++) {
             //看做邻接矩阵,第v排,有多少个1,就是
             //再res记录,与v相连的每个顶点
@@ -84,7 +86,7 @@ public class AdjMatrix {
     }
 
     /**
-     * 查看v点有多少条边
+     * 查看v点有多少条边与之相连
      *
      * @param v 传入的点
      * @return 边的数量

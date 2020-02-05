@@ -3,11 +3,11 @@ package cn.shiyu.bobo.CC;
 import cn.shiyu.bobo.Graph;
 
 /**
- * 环检测
+ * 无向图环检测
  */
 public class CycleDetection {
     private Graph G;
-    private boolean visited[];
+    private boolean[] visited;
     private boolean haCycle;
 
     //深度优先遍历从0开始
@@ -35,9 +35,9 @@ public class CycleDetection {
         visited[v] = true;
         for (Integer w : G.adj(v)) {
             if (!visited[w]) {
-                if (dfs(w, v)) return true;//w的上一个节点就是v
-            } else if (w != parent) {
-                //说明找到了环
+                if (dfs(w, v)) return true;//w的上一个节点就是v,提前终止,巧妙!
+            } else if (w != parent) {//一直往后走
+                // 如果前面那个节点不是来的那个节点,说明找到了环
                 return true;
             }
         }

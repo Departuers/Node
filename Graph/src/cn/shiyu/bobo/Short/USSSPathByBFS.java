@@ -1,21 +1,23 @@
-package cn.shiyu.bobo;
+package cn.shiyu.bobo.Short;
 
+import cn.shiyu.bobo.Graph;
+
+import java.util.ArrayDeque;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.Queue;
 
 /**
  * 无权图的单源最短距离,点对点
  */
-public class USSSPath {
+public class USSSPathByBFS {
 
     private Graph G;
-    private boolean visited[];
+    private boolean[] visited;
     private int[] pre;
     private int[] dis;
     private int s;
 
-    public USSSPath(Graph G, int s) {
+    public USSSPathByBFS(Graph G, int s) {
         this.s = s;
         this.G = G;
         visited = new boolean[G.getV()];
@@ -28,18 +30,18 @@ public class USSSPath {
         bfs(s);
         for (int di : dis) {
             System.out.print(di + " ");
-        }
+        }//到每一个点的距离
         System.out.println();
     }
 
     public void bfs(int s) {
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Integer> queue = new ArrayDeque<Integer>();
         queue.add(s);
         visited[s] = true;
         pre[s] = s;
         dis[s] = 0;
         while (!queue.isEmpty()) {
-            Integer v = queue.remove();
+            int v = queue.remove();
             for (Integer w : G.adj(v)) {//把与v相邻的元素入队
                 if (!visited[w]) {
                     queue.add(w);
@@ -58,7 +60,7 @@ public class USSSPath {
 
     public static void main(String[] args) {
         Graph s = new Graph("g.txt");
-        USSSPath b = new USSSPath(s, 0);
+        USSSPathByBFS b = new USSSPathByBFS(s, 0);
         System.out.println(b.ids(6));
     }
 

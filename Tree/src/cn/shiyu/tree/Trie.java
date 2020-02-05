@@ -9,7 +9,7 @@ public class Trie {
 
         public Node(boolean isWord) {
             this.isWord = isWord;
-            this.next = new TreeMap<>();
+            this.next = new TreeMap<Character, Node>();
         }
 
         public Node() {

@@ -7,7 +7,7 @@ import java.util.Stack;
 //二分搜索树
 public class BST<E extends Comparable<E>> {
     public static void main(String[] args) {
-        BST<Integer> bst = new BST<>();
+        BST<Integer> bst = new BST<Integer>();
         bst.add(13);
         bst.add(15);
         bst.add(10);
@@ -119,7 +119,7 @@ public class BST<E extends Comparable<E>> {
      * 再打印这个元素，出栈一个元素用一个引用接收出来的节点，再把那个元素的右孩子左孩子顺序入栈。
      */
     public void preOrderByStack() {
-        Stack<Node> stack = new Stack<>();
+        Stack<Node> stack = new Stack<Node>();
         stack.push(root);
         while (!stack.isEmpty()) {
             Node node = stack.pop();
@@ -133,7 +133,7 @@ public class BST<E extends Comparable<E>> {
 
     //中序遍历非递归实现！！！
     public void midOrderByStack() {
-        Stack<Node> stack = new Stack<>();
+        Stack<Node> stack = new Stack<Node>();
         Node node = stack.push(root);
         while (!stack.empty() || node != null) {
             while (node != null) {
@@ -172,7 +172,7 @@ public class BST<E extends Comparable<E>> {
      * 弹出谁就把谁的左孩子右孩子顺序放进队列，
      */
     public void levelOrder() {
-        Queue<Node> queue = new LinkedList<>();
+        Queue<Node> queue = new LinkedList<Node>();
         queue.add(root);
         while (!queue.isEmpty()) {
             Node cur = queue.poll();

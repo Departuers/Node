@@ -1,13 +1,16 @@
-package cn.shiyu.bobo.Short;
+package cn.shiyu.bobo.path;
 
 import cn.shiyu.bobo.Graph;
 
 import java.util.*;
 
+/**
+ *
+ */
 public class SingleSourcePathByBFS {
 
     private Graph G;
-    private boolean visited[];
+    private boolean[] visited;
     private int[] pre;
     private int s;
 
@@ -21,12 +24,12 @@ public class SingleSourcePathByBFS {
     }
 
     public void bfs(int s) {
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Integer> queue = new ArrayDeque<Integer>();
         queue.add(s);
         visited[s] = true;
         pre[s] = s;
         while (!queue.isEmpty()) {
-            Integer v = queue.remove();
+            int v = queue.remove();
             for (Integer w : G.adj(v)) {//把与v相邻的元素入队
                 if (!visited[w]) {
                     queue.add(w);
@@ -49,7 +52,7 @@ public class SingleSourcePathByBFS {
     }
 
     public Iterable<Integer> path(int t) {
-        ArrayList<Integer> res = new ArrayList<>();
+        ArrayList<Integer> res = new ArrayList<Integer>();
         if (!isConnectedTo(t)) return res;//如果不能到达
         int cur = t;
         while (cur != s) {

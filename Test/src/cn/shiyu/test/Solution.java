@@ -1,6 +1,7 @@
 package cn.shiyu.test;
 
-import java.util.stream.IntStream;
+
+import java.util.TreeSet;
 
 public class Solution {
     public static boolean isPalindrome(int x) {
@@ -8,8 +9,19 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        int[] num = {3, 4, 1141, 13, 14, 12, 231, 23, 12, 4, 12, 3, 1244};
-        int asInt = IntStream.of(num).parallel().min().getAsInt();
-        System.out.println(asInt);
+        TreeSet<Integer> set = new TreeSet<Integer>();
+        set.add(15);
+        set.add(15);
+        set.add(18);
+        set.add(19);
+        set.add(19);
+        set.add(20);
+
+        set.add(13);
+        set.add(21);
+
+        for (int x:set){
+            System.out.println(x);
+        }
     }
 }

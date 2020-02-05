@@ -17,7 +17,8 @@ public class WeightedGraph implements Cloneable {
 
     public WeightedGraph(String filename) {
         File file = new File(filename);
-        try (Scanner sc = new Scanner(file)) {
+        try {
+            Scanner sc = new Scanner(file);
             V = sc.nextInt();
             if (V < 0) throw new IllegalArgumentException("V dis");
             adj = new TreeMap[V];
