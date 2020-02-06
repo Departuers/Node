@@ -1,7 +1,7 @@
 package cn.shiyu.bobo;
 
 /**
- * 二分图
+ * 二分图检测
  */
 public class Bipartition {
     private Graph G;

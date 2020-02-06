@@ -110,9 +110,13 @@ public class AdjMatrix {
         sb.append("V=").append(V);
         sb.append(", E=").append(E).append('\n');
         for (int v = 0; v < V; v++) {
+            sb.append('{');
             for (int j = 0; j < V; j++) {
-                sb.append(String.format("%d", adj[v][j])).append(" ");
+                sb.append(String.format("%d", adj[v][j]));
+                if (j != V - 1)
+                    sb.append(',');
             }
+            sb.append('}').append(',');
             sb.append('\n');
         }
         return sb.toString();

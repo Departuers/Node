@@ -35,7 +35,7 @@ public class TreeArraySome {
      * @param index 在index位置添加
      * @param k     需要添加的值
      */
-    public void SomeChange(int index, int k) {
+    private void SomeChange(int index, int k) {
         while (index <= n) {
             Cai[index] += k;
             index += LowBit(index);
@@ -70,6 +70,12 @@ public class TreeArraySome {
         return ans;
     }
 
+    /**
+     * 单点查询其
+     *
+     * @param index 索引
+     * @return 该点的值
+     */
     public int Search(int index) {
         return yuan[index - 1] + getSum(index);
     }
