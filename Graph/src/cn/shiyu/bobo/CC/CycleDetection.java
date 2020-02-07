@@ -36,8 +36,9 @@ public class CycleDetection {
         for (Integer w : G.adj(v)) {
             if (!visited[w]) {
                 if (dfs(w, v)) return true;//w的上一个节点就是v,提前终止,巧妙!
-            } else if (w != parent) {//一直往后走
-                // 如果前面那个节点不是来的那个节点,说明找到了环
+            } else if (w != parent) {
+                //DFS搜索到了已经访问过的点
+                //若这个点不是上一个点(构成环最小要3个顶点),则就构成环了,
                 return true;
             }
         }
