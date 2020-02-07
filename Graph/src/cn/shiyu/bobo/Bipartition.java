@@ -34,7 +34,8 @@ public class Bipartition {
         visited[v] = true;
         for (Integer w : G.adj(v)) {
             if (!visited[w]) {
-                if (!dfs(w, 1 - color)) return false;
+                if (!dfs(w, 1 - color))
+                    return false;
                 //原来的颜色是1,传进去的就是0就是(1-1),原来颜色是0,那么穿进去的颜色就是1,就是(1-0)
             } else if (colors[w] == colors[v]) {//如果w这个顶点已经被访问过了,就说明w有颜色,
                 //如果相连的两个顶点颜色相同,那么就不是一个二分图

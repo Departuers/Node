@@ -123,7 +123,7 @@ public class AdjMatrix {
     }
 
     public static void main(String[] args) {
-        AdjMatrix adjMatrix = new AdjMatrix("g.txt");
+        AdjMatrix adjMatrix = new AdjMatrix("g2.txt");
         System.out.println(adjMatrix);
     }
 }
