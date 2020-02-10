@@ -1,6 +1,7 @@
-package cn.shiyu.bobo;
+package cn.shiyu.bobo.Loop;
 
 import cn.shiyu.bobo.CC.CC2;
+import cn.shiyu.bobo.Graph;
 
 /**
  * 欧拉回路
@@ -12,6 +13,12 @@ public class EulerLoop {
         this.G = G;
     }
 
+    /**
+     * O(n)
+     * 每个点的度数是偶数,则图存在欧拉回路
+     *
+     * @return 是否存在欧拉回路
+     */
     public boolean hasEulerLoop() {
         CC2 cc = new CC2(G);
         if (cc.CcCount() > 1) return false;
