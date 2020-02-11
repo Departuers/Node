@@ -27,13 +27,13 @@ public class PrimBest {
         while (!pq.isEmpty()) {
             WeightedEdge minEdge = pq.remove();//由于是优先队列(会自动按权重从小到大排序),前面的肯定是两点之间权重最小的边
             if (visited[minEdge.getV()] && visited[minEdge.getW()]) {//
-                continue;//如果这两个点都已经被标记访问,就终止此次循环,由于优先队列前面
+                continue;//如果这两个点都已经被标记,就终止此次循环,非法边直接扔掉
             }
             mst.add(minEdge);//添加优先队列中权重最小的边
-            int newV = visited[minEdge.getV()] ? minEdge.getW() : minEdge.getV();//选择minEdge中没有被标记访问过的点,由于前面两个点被标记访问的情况已经处理,所以这里肯定有1个或者2个没有被标记访问
-            visited[newV] = true;//标记访问那个没有被访问的节点
+            int newV = visited[minEdge.getV()] ? minEdge.getW() : minEdge.getV();//选择minEdge中没有被标记过的点,由于前面两个点被标记的情况已经处理,所以这里肯定有1个没有被标记
+            visited[newV] = true;//标记访问那个没有被访问的节点,扩展切分
             for (Integer w : G.adj(newV)) {//将与newV(也就是上面那个刚刚标记访问的点)相邻的节点,若这些节点没有访问过,则加入优先队列
-                if (!visited[w])
+                if (!visited[w])//找出newV的横切边,并且是未被找到最小生成树的点
                     pq.add(new WeightedEdge(newV, w, G.getWeight(newV, w)));
             }
         }

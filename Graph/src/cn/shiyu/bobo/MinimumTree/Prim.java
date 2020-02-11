@@ -13,31 +13,30 @@ import java.util.ArrayList;
  * 顶点逐步加入(边权)
  */
 public class Prim {
-    private WeightedGraph G;
     private ArrayList<WeightedEdge> mst;
+    private WeightedGraph G;
 
     public Prim(WeightedGraph g) {
         this.G = g;
         mst = new ArrayList<WeightedEdge>();
-        CCByWeight cc = new CCByWeight(g);
-        if (cc.count() > 1) return;//超过一个联通分量,不处理
-        boolean[] visited = new boolean[G.V()];//记录已经访问的节点
-        visited[0] = true;//从节点0开始,由于所有的顶点都要在结果边集里面,从哪个顶点开始无所谓,
-        for (int i = 1; i < G.V(); i++) {
-            WeightedEdge minEdge = new WeightedEdge(-1, -1, Integer.MAX_VALUE);
-
-            for (int v = 0; v < G.V(); v++) {
-                if (visited[v]) {
-                    for (Integer w : G.adj(v)) {
-                        if (!visited[w] && G.getWeight(v, w) < minEdge.getWeight()) {
-                            minEdge = new WeightedEdge(v, w, G.getWeight(v, w));
+        CCByWeight c = new CCByWeight(g);
+        if (c.count() > 1) return;
+        boolean[] visited = new boolean[g.V()];
+        visited[0] = true;
+        for (int i = 1; i < g.V(); i++) {//只需要找V-1条边,构成最小生成树,所以循环V-1次
+            WeightedEdge minedge = new WeightedEdge(-1, -1, Integer.MAX_VALUE);
+            for (int v = 0; v < g.V(); v++) {
+                if (visited[v])
+                    for (Integer w : g.adj(v)) {
+                        if (!visited[w] && g.getWeight(v, w) < minedge.getWeight()) {
+                            minedge = new WeightedEdge(v, w, g.getWeight(v, w));
                         }
                     }
-                }
-            }//根据顶点寻找权重小的边
-            mst.add(minEdge);
-            visited[minEdge.getV()] = true;
-            visited[minEdge.getW()] = true;
+            }
+            mst.add(minedge);
+            visited[minedge.getW()] = true;
+            visited[minedge.getV()] = true;
+
         }
     }
 
