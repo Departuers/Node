@@ -10,7 +10,7 @@ import java.util.Collections;
 
 /**
  * 最小生成树之Kruskal算法
- * 算法复杂度O(g logg),算法复杂度随边的数量增长
+ * 算法复杂度O(E logE),算法复杂度随边的数量增长
  * 思路:对边集进行排序,使其符合贪心策略
  */
 @SuppressWarnings("all")
