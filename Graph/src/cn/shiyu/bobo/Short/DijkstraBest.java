@@ -2,7 +2,9 @@ package cn.shiyu.bobo.Short;
 
 import cn.shiyu.bobo.WeightedGraph;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 /**
@@ -15,12 +17,15 @@ import java.util.PriorityQueue;
  * （2）设置源点s到自己的最短路径为0即dist = 0。若存在源点有能直接到达的顶点i，则把dist[i]设为e[s][i]。同时把所有其它（即源点不能直接到达的）顶点的最短路径为设为∞。
  * （3）在Q中选择一个离源点s最近的顶点u（即dist[u]最小）加入到P中。并考察所有以点u为起点的边，对每一条边进行松弛操作。
  * （4）重复第3步，如果集合Q为空，算法结束。最终dist数组中的值就是源点到所有顶点的最短路径。
+ * <p>
+ * O(ElogE)
  */
 @SuppressWarnings("all")
 public class DijkstraBest {
     private WeightedGraph G;
     private int s;//单源的那个源点
     private int[] dis;
+    private int[] pre;//记录路径从哪来的
     private boolean[] visited;//用来记录已知最短路程的顶点集合P,也就是已经求出最短路径的集合
 
     private class Node implements Comparable<Node> {
@@ -47,6 +52,7 @@ public class DijkstraBest {
         Arrays.fill(dis, Integer.MAX_VALUE);
         dis[s] = 0;
 
+        pre = new int[G.V()];
         visited = new boolean[G.V()];
         PriorityQueue<Node> pq = new PriorityQueue<Node>();
         pq.add(new Node(s, 0));//源点到源点自身距离为0
@@ -61,6 +67,7 @@ public class DijkstraBest {
                     if (dis[cur] + G.getWeight(cur, w) < dis[w]) {
                         dis[w] = dis[cur] + G.getWeight(cur, w);
                         pq.add(new Node(w, dis[w]));
+                        pre[w] = cur;
                     }
                 }
             }
@@ -88,6 +95,19 @@ public class DijkstraBest {
     public int distTo(int v) {
         G.validateVertex(v);
         return dis[v];
+    }
+
+    public Iterable<Integer> paht(int t) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        G.validateVertex(t);
+        int cur = t;
+        while (cur != s) {
+            res.add(cur);
+            cur = pre[cur];
+        }
+        res.add(s);
+        Collections.reverse(res);
+        return res;
     }
 
     public static void main(String[] args) {

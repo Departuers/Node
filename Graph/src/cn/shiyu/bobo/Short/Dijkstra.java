@@ -16,7 +16,7 @@ public class Dijkstra {
     private WeightedGraph G;
     private int s;//原点
     private int[] dis;
-    private boolean[] visited;//记录已经访问
+    private boolean[] visited;//记录已经求出最短路径的值
 
     public Dijkstra(WeightedGraph G, int s) {
         this.G = G;
@@ -25,26 +25,29 @@ public class Dijkstra {
         this.s = s;
 
         dis = new int[G.V()];
-        Arrays.fill(dis, Integer.MAX_VALUE);//初始化距离为int最大值
-        dis[s] = 0;
-        visited = new boolean[G.V()];
+        Arrays.fill(dis, Integer.MAX_VALUE);
 
+        visited = new boolean[G.V()];
+        dis[s] = 0;
         while (true) {
-            int cur = -1, curdis = Integer.MAX_VALUE;
-            for (int v = 0; v < G.V(); v++) {//遍历所有节点
-                if (!visited[v] && dis[v] < curdis) {//寻找节点未被访问过,并且源点到v的距离<curdis
+            int curdis = Integer.MAX_VALUE, cur = -1;
+            for (int v = 0; v < G.V(); v++) {
+                if (!visited[v] && dis[v] < curdis) {
                     curdis = dis[v];
                     cur = v;
                 }
             }
+
             if (cur == -1) break;
             visited[cur] = true;
-            for (int w : G.adj(cur))
+            for (Integer w : G.adj(cur)) {
                 if (!visited[w]) {
-                    if (dis[cur] + G.getWeight(cur, w) < dis[w])
+                    if (dis[cur] + G.getWeight(cur, w) < dis[w])//
                         dis[w] = dis[cur] + G.getWeight(cur, w);
                 }
+            }
         }
+
     }
 
     /**
@@ -70,7 +73,7 @@ public class Dijkstra {
     }
 
     public static void main(String[] args) {
-        WeightedGraph g = new WeightedGraph("g4.txt");
+        WeightedGraph g = new WeightedGraph("g6.txt");
         Dijkstra dij = new Dijkstra(g, 0);
         for (int v = 0; v < g.V(); v++) {
             System.out.println(dij.distTo(v) + " ");

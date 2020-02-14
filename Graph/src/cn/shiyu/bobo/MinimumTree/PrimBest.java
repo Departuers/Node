@@ -26,7 +26,7 @@ public class PrimBest {
         }
         while (!pq.isEmpty()) {
             WeightedEdge minEdge = pq.remove();//由于是优先队列(会自动按权重从小到大排序),前面的肯定是两点之间权重最小的边
-            if (visited[minEdge.getV()] && visited[minEdge.getW()]) {//
+            if (visited[minEdge.getV()] && visited[minEdge.getW()]) {
                 continue;//如果这两个点都已经被标记,就终止此次循环,非法边直接扔掉
             }
             mst.add(minEdge);//添加优先队列中权重最小的边

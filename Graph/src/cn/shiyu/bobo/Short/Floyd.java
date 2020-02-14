@@ -11,6 +11,10 @@ import java.util.Arrays;
  * 所以，我们假设dist(u,v)为顶点u到顶点v的最短路径的距离，对于每一个顶点k，我们检查dist(u,k) + dist(k,v) < dist(u,v)是否成立，
  * 如果成立，证明从u到k再到v的路径比u直接到v的路径短，我们便设置dist(u,v) = dist(u,k) + dist(k,v)，
  * 这样一来，当我们遍历完所有顶点k，dist(u,v)中记录的便是u到v的最短路径的距离。
+ * <p>
+ * 可以求出所有点对的最短路径,可以求出图的直径
+ * 图的直径:所有点对最短路径的最大值,就是图的直径
+ * O(V^3)效率非常低
  */
 public class Floyd {
     private WeightedGraph G;
@@ -32,7 +36,7 @@ public class Floyd {
         }
         for (int t = 0; t < G.V(); t++) {
             for (int v = 0; v < G.V(); v++) {//枚举整个二维数组
-                for (int w = 0; w < G.V(); w++) {//查找是否有中间顶点w使得从u到w再到v比己知的路径更短
+                for (int w = 0; w < G.V(); w++) {//查找是否有中间顶点t,使得从v到w再到v比己知的路径更短
                     if (dis[v][t] != Integer.MAX_VALUE && dis[t][v] != Integer.MAX_VALUE
                             && dis[v][t] + dis[t][w] < dis[v][w])
                         dis[v][w] = dis[v][t] + dis[t][w];
