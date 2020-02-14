@@ -1,6 +1,4 @@
-package cn.shiyu.directed;
-
-import cn.shiyu.bobo.Graph;
+package cn.shiyu.bobo.directed;
 
 import java.io.File;
 import java.io.FileNotFoundException;

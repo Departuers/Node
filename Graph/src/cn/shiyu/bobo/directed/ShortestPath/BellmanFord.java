@@ -1,6 +1,6 @@
-package cn.shiyu.bobo.Short;
+package cn.shiyu.bobo.directed.ShortestPath;
 
-import cn.shiyu.bobo.WeightedGraph;
+import cn.shiyu.bobo.directed.WeightedGraphByDirected;
 
 import java.util.Arrays;
 
@@ -13,12 +13,12 @@ import java.util.Arrays;
  * O(V*E)
  */
 public class BellmanFord {
-    private WeightedGraph G;
+    private WeightedGraphByDirected G;
     private int s;
     private int[] dis;
     private boolean hasNegCycle = false;//是否存在负权环
 
-    public BellmanFord(WeightedGraph G, int s) {
+    public BellmanFord(WeightedGraphByDirected G, int s) {
         this.G = G;
 
         G.validateVertex(s);
@@ -66,7 +66,7 @@ public class BellmanFord {
     }
 
     public static void main(String[] args) {
-        WeightedGraph g = new WeightedGraph("g6.txt");
+        WeightedGraphByDirected g = new WeightedGraphByDirected("g9.txt",true);
 
         BellmanFord b = new BellmanFord(g, 0);
         System.out.println(Arrays.toString(b.dis));

@@ -1,17 +1,17 @@
-package cn.shiyu.LeetCode;
+package cn.shiyu.bobo.LeetCode;
 
 /**
- * LeetCode 200 岛屿数量
- * 实际上是求有几个联通分量
+ * LeetCode 695
+ * 直接把地图作为图,使用DFS
  */
-public class 岛屿数量 {
+public class 陆地最大面积最优解 {
     private int R, C;
-    private char[][] grid;
+    private int[][] grid;
     private boolean[][] visited;
     private int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};//四联通偏移量
 
 
-    public int numIslands(char[][] grid) {
+    public int maxAreaOfIsland(int[][] grid) {
         if (grid == null)
             return 0;
         R = grid.length;
@@ -24,9 +24,8 @@ public class 岛屿数量 {
         visited = new boolean[R][C];
         for (int i = 0; i < R; i++) {
             for (int j = 0; j < C; j++) {
-                if (!visited[i][j] && grid[i][j] == '1') {
-                    dfs(i, j);
-                    res++;
+                if (!visited[i][j] && grid[i][j] == 1) {
+                    res = Math.max(res, dfs(i, j));
                 }
             }
         }
@@ -39,7 +38,7 @@ public class 岛屿数量 {
         int res = 1;
         for (int d = 0; d < 4; d++) {
             int nextx = x + dirs[d][0], nexty = y + dirs[d][1];
-            if (inArea(nextx, nexty) && !visited[nextx][nexty] && grid[nextx][nexty] == '1') {
+            if (inArea(nextx, nexty) && !visited[nextx][nexty] && grid[nextx][nexty] == 1) {
                 res += dfs(nextx, nexty);
             }
         }

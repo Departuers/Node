@@ -1,4 +1,4 @@
-package cn.shiyu.bobo.Short;
+package cn.shiyu.bobo.Shortest;
 
 /**
  * Shortest Path Fast Algorithm

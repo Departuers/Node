@@ -1,4 +1,4 @@
-package cn.shiyu.LeetCode;
+package cn.shiyu.bobo.LeetCode;
 
 public class 状态压缩哈密尔顿路径 {
 

@@ -1,4 +1,4 @@
-package cn.shiyu.LeetCode;
+package cn.shiyu.bobo.LeetCode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
