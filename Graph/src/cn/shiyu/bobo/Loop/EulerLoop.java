@@ -27,4 +27,12 @@ public class EulerLoop {
         }
         return true;
     }
+
+//    public ArrayList<Integer> result() throws CloneNotSupportedException {
+//        ArrayList<Integer> res = new ArrayList<Integer>();
+//        if (!hasEulerLoop()) return res;
+//        Graph g = (Graph) G.clone();
+//        Stack<Integer> stack = new Stack<Integer>();
+//
+//    }
 }

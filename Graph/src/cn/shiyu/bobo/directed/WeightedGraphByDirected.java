@@ -14,6 +14,7 @@ public class WeightedGraphByDirected implements Cloneable {
     private int E;
     private TreeMap<Integer, Integer>[] adj;
     private boolean directed;
+    private int[] inDegrees, outDegrees;//入度,和出度数组
 
     public WeightedGraphByDirected(String filename, boolean directed) {
         this.directed = directed;
@@ -26,7 +27,8 @@ public class WeightedGraphByDirected implements Cloneable {
             for (int i = 0; i < V; i++) {
                 adj[i] = new TreeMap<Integer, Integer>();
             }
-
+            this.inDegrees = new int[V];
+            this.outDegrees = new int[V];
             E = sc.nextInt();//边
             if (E < 0) throw new IllegalArgumentException("边小于0");
             for (int i = 0; i < E; i++) {
@@ -40,13 +42,18 @@ public class WeightedGraphByDirected implements Cloneable {
                 adj[a].put(b, weight);
                 if (!directed)
                     adj[b].put(a, weight);
+                if (directed) {//如果是有向图,添加a-b这条边,a是出度,代表从a来,b是入度,
+                    outDegrees[a]++;
+                    inDegrees[b]++;
+                }
             }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
-    public WeightedGraphByDirected (String fileName){
+
+    public WeightedGraphByDirected(String fileName) {
         this(fileName, false);
     }
 
@@ -95,7 +102,14 @@ public class WeightedGraphByDirected implements Cloneable {
     public void removeEdge(int v, int w) {
         validateVertex(v);
         validateVertex(w);//对传来的点进行合法性判断
-        if (adj[v].containsKey(w)) E--;//判断有没有传来的这条边(判断有没有v和w组成的边)
+        if (adj[v].containsKey(w)) {
+            E--;//判断有没有传来的这条边(判断有没有v和w组成的边)
+            if (directed) {
+                outDegrees[v]--;//出度代表从v出去的,
+                inDegrees[w]--;//入度代表指向w的边,
+                //删除v-w这条边,v的出度--,w的入度--
+            }
+        }
         adj[v].remove(w);
         if (!directed)
             adj[w].remove(v);
@@ -113,6 +127,18 @@ public class WeightedGraphByDirected implements Cloneable {
             sb.append('\n');
         }
         return sb.toString();
+    }
+
+    public int inDegree(int v) {
+        if (!directed) throw new RuntimeException("无向图没有入度,只有度");
+        validateVertex(v);
+        return inDegrees[v];
+    }
+
+    public int outDegree(int v) {
+        if (!directed) throw new RuntimeException("无向图没有出度,只有度");
+        validateVertex(v);
+        return outDegrees[v];
     }
 
     //重写拷贝(复制)方法
@@ -135,7 +161,11 @@ public class WeightedGraphByDirected implements Cloneable {
     }
 
     public static void main(String[] args) {
-        WeightedGraphByDirected wg = new WeightedGraphByDirected("g4.txt",true);
+        WeightedGraphByDirected wg = new WeightedGraphByDirected("g4.txt", true);
         System.out.println(wg);
+
+        for (int v = 0; v < wg.V(); v++) {
+            System.out.println(wg.inDegree(v)+"  "+wg.outDegree(v));
+        }
     }
 }

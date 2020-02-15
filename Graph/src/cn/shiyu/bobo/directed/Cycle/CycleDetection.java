@@ -1,8 +1,62 @@
 package cn.shiyu.bobo.directed.Cycle;
 
+import cn.shiyu.bobo.directed.WeightedGraphByDirected;
+
 /**
  * 有向图的环检测
  */
 public class CycleDetection {
+    private WeightedGraphByDirected G;
+    private boolean[] visited;
+    private boolean haCycle;
+    private boolean[] onPath;//记录当前路径,就像贪吃蛇一样,
 
+    //深度优先遍历从0开始
+    public CycleDetection(WeightedGraphByDirected G) {
+        this.onPath = new boolean[G.V()];
+        this.G = G;
+        visited = new boolean[G.V()];
+        // dfs(0);没有跟其他顶点联通的不会被遍历到
+        //即使没和任何一个顶点相连,也可以遍历到
+        for (int v = 0; v < G.V(); v++) {//保证在每一个联通分量都进行了环检测
+            if (!visited[v])
+                if (dfs(v, v)) {
+                    this.haCycle = true;//只用找到一个环就够了
+                    break;
+                }
+        }
+    }
+
+    /**
+     * 从顶点v开始,判断图中是否有环
+     *
+     * @param v      需要判断的顶点
+     * @param parent 记录节点的上一个节点,也就是从哪来的
+     */
+    private boolean dfs(int v, int parent) {
+        visited[v] = true;
+        onPath[v] = true;
+        for (Integer w : G.adj(v)) {
+            if (!visited[w]) {
+                if (dfs(w, v)) return true;
+            } else if (onPath[w]) {//对于有向图,从v到w,再从w回到v,虽然只有两个顶点两条边,也算是一个环
+                return true;
+            }
+        }
+        onPath[v] = false;//抹除路径
+        return false;
+    }
+
+    public boolean haCycle() {
+        return haCycle;
+    }
+
+    public static void main(String[] args) {
+        WeightedGraphByDirected s = new WeightedGraphByDirected("g.txt");
+        CycleDetection c = new CycleDetection(s);
+        System.out.println(c.haCycle());
+        WeightedGraphByDirected s1 = new WeightedGraphByDirected("g2.txt");
+        CycleDetection c1 = new CycleDetection(s1);
+        System.out.println(c1.haCycle());
+    }
 }

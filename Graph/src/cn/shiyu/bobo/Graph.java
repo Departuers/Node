@@ -115,6 +115,24 @@ public class Graph {
         return sb.toString();
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        try {
+            Graph clone = (Graph) super.clone();
+            clone.adj = new TreeSet[V];
+            for (int v = 0; v < V; v++) {
+                clone.adj[v] = new TreeSet<Integer>();
+                for (Integer w : adj[v]) {
+                    clone.adj[v].add(w);
+                }
+            }
+            return clone;
+        } catch (CloneNotSupportedException c) {
+            c.printStackTrace();
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         Graph adjList = new Graph("g.txt");
         System.out.println(adjList);
