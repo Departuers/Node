@@ -5,7 +5,7 @@ import cn.shiyu.bobo.Graph;
 import java.util.*;
 
 /**
- *
+ * 单源最短路径BFS实现
  */
 public class SingleSourcePathByBFS {
 
@@ -28,6 +28,7 @@ public class SingleSourcePathByBFS {
         queue.add(s);
         visited[s] = true;
         pre[s] = s;
+
         while (!queue.isEmpty()) {
             int v = queue.remove();
             for (Integer w : G.adj(v)) {//把与v相邻的元素入队
@@ -70,5 +71,4 @@ public class SingleSourcePathByBFS {
 
         System.out.println(ssp.path(6));
     }
-
 }

@@ -69,6 +69,6 @@ public class BellmanFord {
         WeightedGraph g = new WeightedGraph("g6.txt");
 
         BellmanFord b = new BellmanFord(g, 0);
-        System.out.println(Arrays.toString(b.dis));
+        System.out.println(b.distTo(2));
     }
 }

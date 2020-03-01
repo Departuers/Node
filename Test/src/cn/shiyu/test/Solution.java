@@ -1,7 +1,7 @@
 package cn.shiyu.test;
 
 
-import java.util.TreeSet;
+import java.util.ArrayDeque;
 
 public class Solution {
     public static boolean isPalindrome(int x) {
@@ -9,19 +9,10 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        TreeSet<Integer> set = new TreeSet<Integer>();
-        set.add(15);
-        set.add(15);
-        set.add(18);
-        set.add(19);
-        set.add(19);
-        set.add(20);
-
-        set.add(13);
-        set.add(21);
-
-        for (int x:set){
-            System.out.println(x);
-        }
+        ArrayDeque<Integer> a = new ArrayDeque<Integer>();
+        a.push(123);
+        a.push(1234);
+        a.push(222);
+        System.out.println(a.pop());
     }
 }

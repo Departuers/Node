@@ -24,7 +24,7 @@ import java.util.PriorityQueue;
 public class DijkstraBest {
     private WeightedGraph G;
     private int s;//单源的那个源点
-    private int[] dis;
+    public int[] dis;
     private int[] pre;//记录路径从哪来的
     private boolean[] visited;//用来记录已知最短路程的顶点集合P,也就是已经求出最短路径的集合
 
@@ -57,20 +57,21 @@ public class DijkstraBest {
         PriorityQueue<Node> pq = new PriorityQueue<Node>();
         pq.add(new Node(s, 0));//源点到源点自身距离为0
 
-        while (!pq.isEmpty()) {
+        while(!pq.isEmpty()){
+
             int cur = pq.remove().v;
-            if (visited[cur]) continue;
+
+            if(visited[cur]) continue;
 
             visited[cur] = true;
-            for (Integer w : G.adj(cur)) {
-                if (!visited[w]) {
-                    if (dis[cur] + G.getWeight(cur, w) < dis[w]) {
+            for(int w: G.adj(cur))
+                if(!visited[w]){
+                    if(dis[cur] + G.getWeight(cur, w) < dis[w]){
                         dis[w] = dis[cur] + G.getWeight(cur, w);
                         pq.add(new Node(w, dis[w]));
                         pre[w] = cur;
                     }
                 }
-            }
         }
     }
 

@@ -37,14 +37,20 @@ public class Floyd {
         for (int t = 0; t < G.V(); t++) {
             for (int v = 0; v < G.V(); v++) {//枚举整个二维数组
                 for (int w = 0; w < G.V(); w++) {//查找是否有中间顶点t,使得从v到w再到v比己知的路径更短
-                    if (dis[v][t] != Integer.MAX_VALUE && dis[t][v] != Integer.MAX_VALUE
+                    if (dis[v][t] != Integer.MAX_VALUE && dis[t][w] != Integer.MAX_VALUE
                             && dis[v][t] + dis[t][w] < dis[v][w])
                         dis[v][w] = dis[v][t] + dis[t][w];
                 }
             }
         }
 
+        for (int i = 0; i < G.V(); i++) {
+            for (int j = 0; j < G.V(); j++) {
+                System.out.print(dis[i][j]+" ");
+            }
+        }
         for (int v = 0; v < G.V(); v++) {
+
             if (dis[v][v] < 0)
                 hasNegCycle = true;
         }
@@ -68,7 +74,7 @@ public class Floyd {
     }
 
     public static void main(String[] args) {
-        WeightedGraph g = new WeightedGraph("g4.txt");
+        WeightedGraph g = new WeightedGraph("g6.txt");
         Floyd floyed = new Floyd(g);
         if (!floyed.hasNegativeCycle()) {
             for (int v = 0; v < g.V(); v++) {
