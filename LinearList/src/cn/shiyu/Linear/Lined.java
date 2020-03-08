@@ -9,6 +9,7 @@ public class Lined<T> {
         size = 0;
     }
 
+
     public int getsize() {
         return size;
     }

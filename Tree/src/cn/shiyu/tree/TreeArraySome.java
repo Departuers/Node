@@ -55,7 +55,7 @@ public class TreeArraySome {
     }
 
     /**
-     * 单点查询
+     * 前缀和
      * index在这里不是索引,不是从0开始的,而是从1开始的
      *
      * @param index 前index个数的
@@ -80,13 +80,12 @@ public class TreeArraySome {
         return yuan[index - 1] + getSum(index);
     }
 
-
     public static void main(String[] args) {
         int[] arr = {3, 4, 6, 8, 5, 1, 7, 9};
         TreeArraySome a = new TreeArraySome(arr);
         a.SomeChange(1, 7, 4);
         a.SomeChange(3, 8, 2);
-
+        System.out.println(a.getSum(3));
         System.out.println(Arrays.toString(a.Cai));
         System.out.println(a.Search(4));
     }

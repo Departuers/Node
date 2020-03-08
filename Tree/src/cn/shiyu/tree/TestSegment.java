@@ -6,11 +6,11 @@ public class TestSegment {
         SegmentTree<Integer> segmentTree = new SegmentTree<Integer>(nums, new Merger<Integer>() {
             @Override
             public Integer merge(Integer a, Integer b) {
-                return a + b;
+                return Math.max(a, b);
             }
         });
         System.out.println(segmentTree);
+        segmentTree.set(0, 0, nums.length - 1, 2, 23);
         System.out.println(segmentTree.query(0, 2));
-        System.out.println(segmentTree.get(2));
     }
 }
