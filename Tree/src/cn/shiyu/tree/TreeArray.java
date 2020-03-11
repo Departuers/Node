@@ -50,7 +50,7 @@ public class TreeArray {
      */
     public int search(int l, int r) {
         if (l > r)
-            return getSum(l) - getSum(r);//如果左右边界填反了
+            return search(r, l);//如果左右边界填反了
         return getSum(r + 1) - getSum(l);
     }
 

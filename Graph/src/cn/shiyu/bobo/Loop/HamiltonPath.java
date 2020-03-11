@@ -1,27 +1,31 @@
-package cn.shiyu.bobo.Birdge;
+package cn.shiyu.bobo.Loop;
+
 
 import cn.shiyu.bobo.Graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * 哈密尔顿路径,
+ * 对于起始点很重要
+ */
 @SuppressWarnings("all")
-public class HamiltonLoop {
+public class HamiltonPath {
     private Graph G;
     private boolean[] visited;
     private int[] pre;
     private int end;
 
-    public HamiltonLoop(Graph g) {
+    public HamiltonPath(Graph g, int start) {
         this.G = g;
         end = -1;
         visited = new boolean[g.getV()];
         pre = new int[g.getV()];
-        dfs(0, 0, g.getV());
+        dfs(start, start, g.getV());
     }
 
     /**
-     *
      * @param v
      * @param parent
      * @param left
@@ -36,8 +40,7 @@ public class HamiltonLoop {
                 if (dfs(w, v, left)) {
                     return true;
                 }
-            } else if (w == 0 && left == 0) {
-
+            } else if (left == 0) {
                 end = v;
                 return true;
             }

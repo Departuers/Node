@@ -12,8 +12,8 @@ import static java.lang.System.in;
 public class segmentTree {
     static class Node {
         public int l, r, w, lazy;//l节点左边界,r右边界,w为节点值,
-        // lazy为懒标记
 
+        // lazy为懒标记
         Node(int l, int r, int w) {
             this.l = l;
             this.r = r;
@@ -76,6 +76,22 @@ public class segmentTree {
     }
 
     /**
+     * 单点查询
+     *
+     * @param k     起点1
+     * @param index 要查询的点
+     */
+    static int ask_one(int k, int index) {
+        if ((tree[k].l == tree[k].r) && tree[k].r == index) {
+            return tree[k].w;
+        }
+        if (tree[k].lazy != 0) down(k);
+        int mid = (tree[k].l + tree[k].r) / 2;
+        if (index <= mid) return ask_one(k * 2, index);
+        else return ask_one(k * 2 + 1, index);
+    }
+
+    /**
      * 单点增加
      * 单点修改同理!!!
      *
@@ -107,7 +123,6 @@ public class segmentTree {
      */
     static void ask_some(int k, int ll, int rr) {
         if (tree[k].l >= ll && tree[k].r <= rr) {
-            System.out.println(tree[k].w);
             ans += tree[k].w;
             return;
         }
@@ -115,6 +130,32 @@ public class segmentTree {
         int mid = (tree[k].l + tree[k].r) / 2;
         if (ll <= mid) ask_some(k * 2, ll, rr);
         if (rr > mid) ask_some(k * 2 + 1, ll, rr);
+    }
+
+    /**
+     * 区间查询
+     * 左边界ll必须小于rr右边界否则会报错
+     * 区间查询,查询到一个节点的包含要查询的区间的一部分
+     * 则分段继续查询,把要查询区间的左右部分,分别交给下一次递归
+     *
+     * @param k  起点
+     * @param ll 左边界
+     * @param rr 有边界
+     * @return 返回区间值
+     */
+    static int ask_someRe(int k, int ll, int rr) {
+        if (tree[k].l >= ll && tree[k].r <= rr) {
+            return tree[k].w;
+        }
+        if (tree[k].lazy != 0) down(k);
+        int mid = (tree[k].l + tree[k].r) / 2;
+        if (rr <= mid) {
+            return ask_someRe(k * 2, ll, rr);
+        } else if (ll > mid) {
+            return ask_someRe(k * 2 + 1, ll, rr);
+        } else {
+            return ask_someRe(k * 2, ll, mid) + ask_someRe(k * 2 + 1, mid + 1, rr);
+        }
     }
 
     //标记下传
@@ -147,12 +188,11 @@ public class segmentTree {
         for (int i = 1; i <= 6; i++) {
             ask(1, i);
             System.out.println(ans);
+            ans = 0;
         }
-        change_some(1, 3, 6, 10);
         System.out.println();
         for (int i = 1; i <= 6; i++) {
-            ask(1, i);
-            System.out.println(ans);
+            System.out.println(ask_one(1, i));
         }
     }
 

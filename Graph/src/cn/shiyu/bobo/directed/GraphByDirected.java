@@ -13,6 +13,7 @@ public class GraphByDirected {
     private int E;//多少条边
     private TreeSet<Integer>[] adj;//图的结构
     private boolean directed;//记录图是有向图还是无向图
+    private int[] inDegrees, outDegrees;//入度,和出度数组
 
     public GraphByDirected(String fileName, boolean directed) {
         this.directed = directed;
@@ -25,6 +26,8 @@ public class GraphByDirected {
             for (int i = 0; i < V; i++) {
                 adj[i] = new TreeSet<Integer>();
             }
+            inDegrees = new int[V];
+            outDegrees = new int[V];
 
             E = sc.nextInt();//边的数量
             if (E < 0) throw new IllegalArgumentException("E Must >=0");
@@ -38,6 +41,10 @@ public class GraphByDirected {
                 adj[a].add(b);
                 if (!directed)//如果是无向图,才添加边
                     adj[b].add(a);
+                if (directed) {
+                    outDegrees[a]++;
+                    inDegrees[b]++;
+                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -98,10 +105,27 @@ public class GraphByDirected {
     public void removeEdge(int v, int w) {
         validateVertex(v);
         validateVertex(w);//对传来的点进行合法性判断
-        if (adj[v].contains(w)) E--;//判断有没有传来的这条边(判断有没有v和w组成的边)
+        if (adj[v].contains(w)) {
+            E--;//判断有没有传来的这条边(判断有没有v和w组成的边)
+            if (directed) {
+                outDegrees[v]--;
+                inDegrees[w]--;
+            }
+        }
         adj[v].remove(w);
         if (!directed)//如果是无向图才删除
             adj[w].remove(v);
+
+    }
+
+    public int indegrees(int v) {
+        validateVertex(v);
+        return inDegrees[v];
+    }
+
+    public int outdegrees(int v) {
+        validateVertex(v);
+        return outDegrees[v];
     }
 
     /**

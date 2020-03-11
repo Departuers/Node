@@ -57,16 +57,16 @@ public class DijkstraBest {
         PriorityQueue<Node> pq = new PriorityQueue<Node>();
         pq.add(new Node(s, 0));//源点到源点自身距离为0
 
-        while(!pq.isEmpty()){
+        while (!pq.isEmpty()) {
 
             int cur = pq.remove().v;
 
-            if(visited[cur]) continue;
+            if (visited[cur]) continue;
 
             visited[cur] = true;
-            for(int w: G.adj(cur))
-                if(!visited[w]){
-                    if(dis[cur] + G.getWeight(cur, w) < dis[w]){
+            for (int w : G.adj(cur))
+                if (!visited[w]) {
+                    if (dis[cur] + G.getWeight(cur, w) < dis[w]) {
                         dis[w] = dis[cur] + G.getWeight(cur, w);
                         pq.add(new Node(w, dis[w]));
                         pre[w] = cur;
@@ -98,7 +98,7 @@ public class DijkstraBest {
         return dis[v];
     }
 
-    public Iterable<Integer> paht(int t) {
+    public Iterable<Integer> path(int t) {
         ArrayList<Integer> res = new ArrayList<Integer>();
         G.validateVertex(t);
         int cur = t;

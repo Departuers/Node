@@ -28,7 +28,8 @@ public class KruskalBest {
             }
         }
         UnionFind5 uf = new UnionFind5(g.V());
-        for (WeightedEdge edge : pq) {
+        while (!pq.isEmpty()) {
+            WeightedEdge edge = pq.poll();
             if (!uf.isConnected(edge.getV(), edge.getW())) {
                 mst.add(edge);
                 uf.unionElements(edge.getV(), edge.getW());

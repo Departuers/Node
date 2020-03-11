@@ -58,7 +58,7 @@ public class WeightedGraphByDirected implements Cloneable {
     }
 
     public void validateVertex(int v) {
-        if (v < 0 || v >= V)
+        if (v > V)
             throw new IllegalArgumentException("vertex " + v + "is invalid");
     }
 
@@ -165,7 +165,7 @@ public class WeightedGraphByDirected implements Cloneable {
         System.out.println(wg);
 
         for (int v = 0; v < wg.V(); v++) {
-            System.out.println(wg.inDegree(v)+"  "+wg.outDegree(v));
+            System.out.println(wg.inDegree(v) + "  " + wg.outDegree(v));
         }
     }
 }

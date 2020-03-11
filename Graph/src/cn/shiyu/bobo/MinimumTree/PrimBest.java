@@ -6,7 +6,6 @@ import cn.shiyu.bobo.WeightedGraph;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 /**
  * Prim算法堆优化
@@ -23,7 +22,7 @@ public class PrimBest {
 
         boolean[] visited = new boolean[G.V()];//记录已经访问的节点
         visited[0] = true;//从节点0开始,由于所有的顶点都要在结果边集里面,从哪个顶点开始无所谓,
-        Queue<WeightedEdge> pq = new PriorityQueue<WeightedEdge>();
+        PriorityQueue<WeightedEdge> pq = new PriorityQueue<WeightedEdge>();
         for (Integer w : G.adj(0)) {
             pq.add(new WeightedEdge(0, w, G.getWeight(0, w)));//由于只有一个联通分量,把与0相连的边都添加进优先队列
         }
@@ -42,14 +41,19 @@ public class PrimBest {
         }
     }
 
-    public ArrayList<WeightedEdge> result() {
-        return mst;
+    public int result() {
+        int i = 0;
+        for (WeightedEdge edge : mst) {
+            i += edge.getWeight();
+        }
+        return i;
     }
 
     public static void main(String[] args) {
 
-        WeightedGraph g = new WeightedGraph("g4.txt");
+        WeightedGraph g = new WeightedGraph("g6.txt");
         PrimBest prim = new PrimBest(g);
         System.out.println(prim.result());
+        System.out.println(prim.mst);
     }//[WeightedEdge{v=1, w=2}, WeightedEdge{v=3, w=4}, WeightedEdge{v=0, w=1}, WeightedEdge{v=0, w=5}, WeightedEdge{v=1, w=4}, WeightedEdge{v=3, w=6}]
 }

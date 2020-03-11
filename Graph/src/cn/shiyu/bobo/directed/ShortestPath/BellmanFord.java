@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class BellmanFord {
     private WeightedGraphByDirected G;
     private int s;
-    private int[] dis;
+    public int[] dis;
     private boolean hasNegCycle = false;//是否存在负权环
 
     public BellmanFord(WeightedGraphByDirected G, int s) {

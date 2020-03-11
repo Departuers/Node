@@ -3,6 +3,9 @@ package cn.shiyu.bobo.Loop;
 import cn.shiyu.bobo.CC.CC2;
 import cn.shiyu.bobo.Graph;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 /**
  * 欧拉回路
  */
@@ -28,11 +31,32 @@ public class EulerLoop {
         return true;
     }
 
-//    public ArrayList<Integer> result() throws CloneNotSupportedException {
-//        ArrayList<Integer> res = new ArrayList<Integer>();
-//        if (!hasEulerLoop()) return res;
-//        Graph g = (Graph) G.clone();
-//        Stack<Integer> stack = new Stack<Integer>();
-//
-//    }
+    //Hierholzer算法
+    public ArrayList<Integer> result() throws CloneNotSupportedException {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        if (!hasEulerLoop()) return res;
+        //下面开始寻找欧拉回路
+        Graph g = (Graph) G.clone();
+        Stack<Integer> stack = new Stack<Integer>();
+        int curv = 0;
+        stack.push(curv);
+        while (!stack.isEmpty()) {
+            if (g.degree(curv) != 0) {
+                stack.push(curv);
+                int w = g.adj(curv).iterator().next();
+                g.removeEdge(curv, w);
+                curv = w;
+            } else {
+                res.add(curv);//栈中内容是倒序,但pop就是正序
+                curv = stack.pop();
+            }
+        }
+        return res;
+    }
+
+    public static void main(String[] args) throws CloneNotSupportedException {
+        Graph g = new Graph("g34.txt");
+        EulerLoop e = new EulerLoop(g);
+        System.out.println(e.result());
+    }
 }

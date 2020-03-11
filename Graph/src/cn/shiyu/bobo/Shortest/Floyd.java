@@ -44,13 +44,7 @@ public class Floyd {
             }
         }
 
-        for (int i = 0; i < G.V(); i++) {
-            for (int j = 0; j < G.V(); j++) {
-                System.out.print(dis[i][j]+" ");
-            }
-        }
         for (int v = 0; v < G.V(); v++) {
-
             if (dis[v][v] < 0)
                 hasNegCycle = true;
         }

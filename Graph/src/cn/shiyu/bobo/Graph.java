@@ -10,7 +10,7 @@ import java.util.TreeSet;
  * 由于TreeSet是满足二分搜索树的基本性质
  * TreeSet遍历时使用中序遍历,是有序的!
  */
-public class Graph {
+public class Graph implements Cloneable {
     private int V;//多少个顶点
     private int E;//多少条边
     private TreeSet<Integer>[] adj;//图的结构
@@ -100,6 +100,16 @@ public class Graph {
         if (v < 0 || v >= V) throw new IllegalArgumentException(v + "is not");
     }
 
+    /**
+     * @param v-w 删除v-w这条边
+     */
+    public void removeEdge(int v, int w) {
+        validateVertex(v);
+        validateVertex(w);
+        adj[v].remove(w);
+        adj[w].remove(v);
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -115,6 +125,7 @@ public class Graph {
         return sb.toString();
     }
 
+    //深拷贝,是把对象复制一份传给别人,浅拷贝直接把引用传给别人
     @Override
     public Object clone() throws CloneNotSupportedException {
         try {

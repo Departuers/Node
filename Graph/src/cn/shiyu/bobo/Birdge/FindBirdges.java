@@ -5,8 +5,8 @@ import cn.shiyu.bobo.Graph;
 import java.util.ArrayList;
 
 /**
- * 寻桥
- * 使用DFS就可以寻桥
+ * 寻桥模板
+ * 只能DFS寻桥
  */
 @SuppressWarnings("all")
 public class FindBirdges {
