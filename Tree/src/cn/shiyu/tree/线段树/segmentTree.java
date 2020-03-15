@@ -8,6 +8,35 @@ import static java.lang.System.in;
 /**
  * https://www.cnblogs.com/TheRoadToTheGold/p/6254255.html
  * 竞赛版本线段树
+ * 每个节点维护一个闭区间[l,r](l<=r)的信息
+ * 根节点表示:[1,n]的信息
+ * 如果l==r说明是叶子节点
+ * 如果l<r就是内部结点,一定有左孩子和右孩子,
+ * 其左节点为[1,(l+r)/2]右节点为[(l+r)/2+1,r]
+ * <p>
+ * 1代表根节点
+ * 线段树处理的数列长度为n,则根节点区间为[1,n]
+ * 节点数不超过2n
+ * 证明:由于叶子节点存储单个元素,
+ * 而完全二叉树第n层,有2^(n-1)个叶子节点,
+ * 假设让完全二叉树的叶子节点第x层存储单个元素,
+ * 根据二叉树每层节点数量的性质,
+ * x+x/2+x/4+x/8+...收敛于2x
+ * 但在存储时开4x空间保险,因为有可能多一层出来
+ * <p>
+ * 无穷
+ * ∑   x/2^i    收敛于2x
+ * i=0
+ * <p>
+ * 而线段树的深度也是log n
+ * 对于单点修改O(log n),单点查询O(log n),找到叶子节点操作即可
+ * 对于区间查询O(log n):找到符合条件的内部节点,拼接答案即可
+ * (如查询[3,9],若没有这个区间拼接[3,5]+[6,9])
+ *
+ * 对于区间修改,如果对叶子节点进行(r-l)+1次修改,那还不如模拟
+ * 所以进行懒标记,如果不查询某叶子节点,那就把内部节点大区间打上标签
+ * 查询到那个叶子节点之前,进行标记下传
+ *
  */
 public class segmentTree {
     static class Node {
@@ -158,6 +187,26 @@ public class segmentTree {
         }
     }
 
+    /**
+     * 显然最好的写法
+     *
+     * @param k  起点
+     * @param ll 左边界
+     * @param rr 右边界
+     * @return 区间值
+     */
+    static int ask_somelast(int k, int ll, int rr) {
+        if (tree[k].l >= ll && tree[k].r <= rr) {
+            return tree[k].w;
+        }
+        if (tree[k].lazy != 0) down(k);
+        int mid = (tree[k].l + tree[k].r) / 2, ans = 0;
+        if (ll <= mid) ans += ask_somelast(k * 2, ll, rr);
+        if (rr > mid) ans += ask_somelast(k * 2 + 1, ll, rr);
+        return ans;
+    }
+
+
     //标记下传
     static void down(int k) {
         tree[k * 2].lazy += tree[k].lazy;
@@ -186,13 +235,13 @@ public class segmentTree {
         build(1, 1, data.length);
         System.out.println(Arrays.toString(tree));
         for (int i = 1; i <= 6; i++) {
-            ask(1, i);
+            ask_some(1, 1, i);
             System.out.println(ans);
             ans = 0;
         }
         System.out.println();
         for (int i = 1; i <= 6; i++) {
-            System.out.println(ask_one(1, i));
+            System.out.println(ask_somelast(1, 1, i));
         }
     }
 

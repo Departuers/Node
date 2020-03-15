@@ -36,14 +36,14 @@ public class SPFA {
             int v = queue.pollFirst();
             visited[v] = false;
             for (Integer w : g.adj(v)) {
-                if (dis[v] + g.getWeight(v, w) < dis[w] && dis[v] != Integer.MAX_VALUE) {
+                if (dis[v] != Integer.MAX_VALUE && dis[v] + g.getWeight(v, w) < dis[w]) {
                     dis[w] = dis[v] + g.getWeight(v, w);
                     pre[w] = v;
                     visited[w] = true;
                     if (!queue.isEmpty() && dis[w] < dis[queue.peek()]) {
-                        queue.add(w);
-                    } else {
                         queue.addFirst(w);
+                    } else {
+                        queue.add(w);
                     }
                 }
             }
