@@ -93,6 +93,10 @@ public class WeightedGraphByDirected implements Cloneable {
         throw new IllegalArgumentException(String.format("No edge %d-%d", v, w));
     }
 
+    public boolean isDirected(){
+        return directed;
+    }
+
     /**
      * 删除两个点之间的边
      *

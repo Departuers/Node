@@ -3,7 +3,7 @@ package cn.shiyu.bobo.directed.Euler;
 import cn.shiyu.bobo.directed.WeightedGraphByDirected;
 
 /**
- * 有向图的欧拉回路:每个点的入度等于出度,该图就存在欧拉回路
+ * 有向图的欧拉回路的充分必要条件:每个点的入度等于出度,该图就存在欧拉回路
  */
 public class EulerLoop {
     private WeightedGraphByDirected G;
@@ -23,7 +23,7 @@ public class EulerLoop {
     }
 
     /**
-     * 有向图的欧拉回路:每个点的入度等于出度,该图就存在欧拉回路
+     * 有向图的欧拉回路的充分必要条件:每个点的入度等于出度,该图就存在欧拉回路
      *
      * @return 是否有欧拉回路
      */

@@ -9,6 +9,7 @@ import java.util.PriorityQueue;
 
 /**
  * Prim算法堆优化
+ * O(E log E)
  */
 public class PrimBest {
     private WeightedGraph G;

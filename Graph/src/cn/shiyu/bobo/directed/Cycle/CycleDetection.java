@@ -28,18 +28,21 @@ public class CycleDetection {
     }
 
     /**
+     * 在有向图中:即使找到了已经遍历过的节点也不代表形成环
      * 从顶点v开始,判断图中是否有环
+     * 在当前路径上添加一个标记:onPath[]
      *
      * @param v      需要判断的顶点
      * @param parent 记录节点的上一个节点,也就是从哪来的
      */
     private boolean dfs(int v, int parent) {
         visited[v] = true;
-        onPath[v] = true;
+        onPath[v] = true;//添加标记
         for (Integer w : G.adj(v)) {
             if (!visited[w]) {
                 if (dfs(w, v)) return true;
-            } else if (onPath[w]) {//对于有向图,从v到w,再从w回到v,虽然只有两个顶点两条边,也算是一个环
+            } else if (onPath[w]) {
+                //对于有向图,从v到w,再从w回到v,虽然只有两个顶点两条边,也算是一个环
                 return true;
             }
         }

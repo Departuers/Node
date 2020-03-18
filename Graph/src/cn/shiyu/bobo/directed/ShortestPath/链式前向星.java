@@ -36,7 +36,7 @@ public class 链式前向星 {
         add(1, 4, 6);
         add(1, 2, 1);
         add(2, 3, 1);
-        int start = 4;
+        int start = 1;
         for (int i = head[start]; i != 0; i = edge[i].next) {
             System.out.println(start + "->" + edge[i].to + "权值" + edge[i].w);
         }
@@ -64,7 +64,7 @@ public class 链式前向星 {
         visited[s] = true;
         int v = 0;
         while (!queue.isEmpty()) {
-            Integer p = queue.pollFirst();
+            Integer p = queue.poll();
             visited[p] = false;
             for (int i = head[p]; i != 0; i = edge[i].next) {
                 v = edge[i].to;

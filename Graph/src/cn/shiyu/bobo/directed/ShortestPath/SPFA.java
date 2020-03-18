@@ -33,7 +33,7 @@ public class SPFA {
         queue.addLast(s);
         visited[s] = true;
         while (!queue.isEmpty()) {
-            int v = queue.pollFirst();
+            int v = queue.poll();
             visited[v] = false;
             for (Integer w : g.adj(v)) {
                 if (dis[v] != Integer.MAX_VALUE && dis[v] + g.getWeight(v, w) < dis[w]) {

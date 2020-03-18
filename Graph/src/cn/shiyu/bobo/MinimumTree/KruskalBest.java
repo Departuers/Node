@@ -10,6 +10,7 @@ import java.util.PriorityQueue;
 
 /**
  * 使用优先队列优化边排序
+ * O(E log E)
  */
 public class KruskalBest {
     private WeightedGraph g;
