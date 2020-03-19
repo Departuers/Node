@@ -55,6 +55,24 @@ public class GraphByDirected {
         this(fileName, false);
     }
 
+    public GraphByDirected(TreeSet<Integer>[] adj, boolean directed) {
+        this.adj = adj;
+        this.directed = directed;
+        this.V = adj.length;
+        this.E = 0;
+        inDegrees = new int[V];
+        outDegrees = new int[V];
+        for (int v = 0; v < V; v++) {
+            for (Integer w : adj[v]) {
+                outDegrees[v]++;
+                inDegrees[w]++;
+                this.E++;
+            }
+        }
+        if (!directed) this.E /= 2;//如果是无向图,求反图无意义,边数/2
+
+    }
+
     /**
      * @return 是否是有向图
      */
@@ -63,12 +81,12 @@ public class GraphByDirected {
     }
 
     //获取顶点数量
-    public int getV() {
+    public int V() {
         return V;
     }
 
     //获取边的数量
-    public int getE() {
+    public int E() {
         return E;
     }
 
@@ -116,6 +134,19 @@ public class GraphByDirected {
         if (!directed)//如果是无向图才删除
             adj[w].remove(v);
 
+    }
+    //求反图
+    public GraphByDirected reverseGraph() {
+        TreeSet<Integer>[] rAdj = new TreeSet[V];
+        for (int i = 0; i < V; i++) {
+            rAdj[i] = new TreeSet<Integer>();
+        }
+        for (int v = 0; v < V; v++) {
+            for (Integer w : adj[v]) {
+                rAdj[w].add(v);
+            }
+        }
+        return new GraphByDirected(rAdj, directed);
     }
 
     public int indegrees(int v) {

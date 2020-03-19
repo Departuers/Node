@@ -1,20 +1,18 @@
 package cn.shiyu.bobo.directed.Cycle;
 
-
-import cn.shiyu.bobo.directed.GraphByDirected;
 import cn.shiyu.bobo.directed.WeightedGraphByDirected;
 
 /**
  * 有向图带权图的环检测
  */
-public class CycleDetection {
-    private GraphByDirected G;
+public class WeightedCycleDetection {
+    private WeightedGraphByDirected G;
     private boolean[] visited;
     private boolean haCycle;
     private boolean[] onPath;//记录当前路径,就像贪吃蛇一样,
 
     //深度优先遍历从0开始
-    public CycleDetection(GraphByDirected G) {
+    public WeightedCycleDetection(WeightedGraphByDirected G) {
         this.onPath = new boolean[G.V()];
         this.G = G;
         visited = new boolean[G.V()];
@@ -65,4 +63,3 @@ public class CycleDetection {
         System.out.println(c1.haCycle());
     }
 }
-
