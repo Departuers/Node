@@ -14,14 +14,15 @@ import static java.lang.System.in;
  * 主席树
  * 非常牛逼！！！
  * https://blog.csdn.net/bestFy/article/details/78650360
+ * https://www.luogu.com.cn/record/18131499
  */
 public class 主席树 {
-    static int[] a = new int[100010];
-    static int[] b = new int[100010];
-    static int[] T = new int[100010];
-    static int[] sum = new int[100010*20];
-    static int[] L = new int[100010*20];
-    static int[] R = new int[100010*20];
+    static int[] a = new int[200010];
+    static int[] b = new int[200010];
+    static int[] T = new int[200010];
+    static int[] sum = new int[200010 * 32];
+    static int[] L = new int[200010 * 32];
+    static int[] R = new int[200010 * 32];
     static int tot = 0;
 
     static int build(int l, int r) {
@@ -57,6 +58,7 @@ public class 主席树 {
         if (x >= k) return query(L[u], L[v], l, mid, k);
         else return query(R[u], R[v], mid + 1, r, k - x);
     }
+
     static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
     static StringTokenizer tokenizer = new StringTokenizer("");
 
@@ -88,10 +90,9 @@ public class 主席树 {
             a[i] = nextInt();
             t.add(a[i]);
         }
-        int c =1;
+        int c = 1;
         for (Integer w : t) {
-            b[c] = w;
-            c++;
+            b[c++] = w;
         }
         int m = t.size();
         T[0] = build(1, m);
@@ -99,12 +100,12 @@ public class 主席树 {
             a[i] = Arrays.binarySearch(b, 1, 1 + m, a[i]);
             T[i] = update(T[i - 1], 1, m, a[i]);
         }
+        int x, y, z, en;
         while (q-- != 0) {
-            int x, y, z;
             x = nextInt();
             y = nextInt();
             z = nextInt();
-            int en=query(T[x-1],T[y],1,m,z);
+            en = query(T[x - 1], T[y], 1, m, z);
             System.out.println(b[en]);
         }
     }

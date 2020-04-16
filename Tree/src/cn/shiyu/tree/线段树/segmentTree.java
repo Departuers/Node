@@ -51,12 +51,10 @@ public class segmentTree {
 
         @Override
         public String toString() {
-            final StringBuilder sb = new StringBuilder("Node{");
-            sb.append("l=").append(l);
-            sb.append(", r=").append(r);
-            sb.append(", w=").append(w);
-            sb.append('}');
-            return sb.toString();
+            return "Node{" + "l=" + l +
+                    ", r=" + r +
+                    ", w=" + w +
+                    '}';
         }
     }
 
@@ -244,5 +242,4 @@ public class segmentTree {
             System.out.println(ask_somelast(1, 1, i));
         }
     }
-
 }

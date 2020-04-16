@@ -39,11 +39,13 @@ public class SPFA {
                 if (dis[v] != Integer.MAX_VALUE && dis[v] + g.getWeight(v, w) < dis[w]) {
                     dis[w] = dis[v] + g.getWeight(v, w);
                     pre[w] = v;
-                    visited[w] = true;
-                    if (!queue.isEmpty() && dis[w] < dis[queue.peek()]) {
-                        queue.addFirst(w);
-                    } else {
-                        queue.add(w);
+                    if (!visited[w]) {
+                        visited[w] = true;
+                        if (!queue.isEmpty() && dis[w] < dis[queue.peek()]) {
+                            queue.addFirst(w);
+                        } else {
+                            queue.add(w);
+                        }
                     }
                 }
             }
